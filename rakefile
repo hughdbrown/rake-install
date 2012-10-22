@@ -1,0 +1,132 @@
+#
+# The documentation server build script.
+#
+
+require 'find'
+require 'rake'
+require 'rake/clean'
+
+#require 'yaml'
+#require 'rubygems'
+#require 'json'
+
+# Load other rake tasks
+Dir.glob('tasks/*.rake') {|f| load(f) }
+
+#-----------------------------------------------------
+# Helper methods
+#-----------------------------------------------------
+def highlight(message, length=nil)
+  stars = '*' * ((length or message.length) + 4)
+  return ["", stars, "* #{message} *", stars, "", ""].join("\n")
+end
+
+def colorize(message, color=:red)
+  colors = { :red => "31", :green => "32" }
+  return "\e[#{colors[color]}m#{message}\e[0m"
+end
+
+def lowlight(message)
+  to_print = "FAILURE: #{message}"
+  raw_length = to_print.length
+
+  to_print = colorize(to_print, :red) if $stdout.isatty
+
+  return highlight(to_print, raw_length)
+end
+
+def notice(message)
+  $stderr.puts highlight(message)
+end
+
+def check_env_var(variables)
+  missing = variables.find_all { |v| ENV[v] == nil }
+  raise "The following variables are missing and are needed to run this script: #{missing.join(', ')}." unless missing.empty?
+end
+
+#-----------------------------------------------------
+# Installation methods
+#-----------------------------------------------------
+def install_pkg(apps)
+  #apps.each { |app| sh("sudo apt-get -y install #{app}") }
+  all_apps = "#{apps.join(' ')}"
+  notice("Installing #{all_apps}")
+  sh("sudo apt-get -y install #{all_apps}")
+end
+
+def remove_pkg(apps)
+  #apps.each { |app| sh("sudo apt-get -y install #{app}") }
+  all_apps = "#{apps.join(' ')}"
+  notice("Removing #{all_apps}")
+  sh("sudo apt-get -y remove #{all_apps}")
+end
+
+def install_ppa(ppa)
+  sh("sudo add-apt-repository \"#{ppa}\" && sudo apt-get update")
+  notice("Installed ppa #{ppa}")
+end
+
+def install_gems(gems)
+  all_gems = "#{gems.sort.join(' ')}"
+  sh("gem install #{all_gems}")
+  notice("Installed #{all_gems}")
+end
+
+def upgrade_gems(gems)
+  all_gems = "#{gems.sort.join(' ')}"
+  sh("gem install -u #{all_gems}")
+  notice("Upgraded #{all_gems}")
+end
+
+def _download_tar(url, tarfile)
+  sh("wget #{url} -O #{tarfile} && tar xvfz #{tarfile}")
+end
+
+def download_tar(url, version, target, ext="tar.gz", dir="/tmp")
+  tarfile = "#{version}.#{ext}"
+  notice("Downloading tarfile #{tarfile}")
+  pwd = FileUtils.pwd()
+  
+  FileUtils.cd(dir) do
+    begin
+      _download_tar(url, tarfile)
+    ensure
+      FileUtils.mv(target, pwd, :verbose => true) if File.exists?(target)
+      FileUtils.rm(tarfile, :verbose => true) if File.exists?(tarfile)
+    end
+  end
+end
+
+def install_tar(url, version, ext="tar.gz", dir="/tmp")
+  tarfile = "#{version}.#{ext}"
+  notice("Installing tarfile #{tarfile}")
+  FileUtils.cd(dir) do
+    begin
+      _download_tar(url, tarfile)
+
+      FileUtils.cd(version) do
+        sh("./configure && make && sudo make install")
+      end
+    ensure
+      FileUtils.rm(tarfile, :verbose => true)
+    end
+  end
+end
+
+def install_deb(url, debfile, dir="/tmp")
+  notice("Installing debfile #{debfile}")
+  begin
+    FileUtils.cd(dir) do
+      sh("wget #{url} -O #{debfile} && sudo dpkg -i #{debfile}")
+    end
+  ensure
+    FileUtils.rm(debfile) if File.exists?(debfile)
+  end
+end
+
+#-----------------------------------------------------
+# Additional Configuration
+#-----------------------------------------------------
+def mac?
+  return RUBY_PLATFORM.include? 'darwin'
+end
