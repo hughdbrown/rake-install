@@ -1,5 +1,4 @@
 namespace :extra do
-  task :all => [:libraries, :dpkg]
 
   desc "Install libraries"
   task :libraries do
@@ -13,3 +12,6 @@ namespace :extra do
     install_pkg(tools)
   end
 end
+
+desc "Install extra stuff"
+task :extra => ["extra:libraries", "extra:dpkg"]

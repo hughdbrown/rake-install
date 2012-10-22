@@ -1,5 +1,4 @@
 namespace :security do
-  task :all => [:crypt, :libraries]
   
   desc "Install crypt apps"
   task :crypt do
@@ -13,3 +12,4 @@ namespace :security do
     install_pkg(tools)
   end
 end
+task :security => ["security:crypt", "security:libraries"]

@@ -1,6 +1,4 @@
 namespace :dev do
-  task :all => [:essential, :language, :web, :zip, :tools]
-
   desc "Install dev tools"
   task :tools do
     tools = %w{dkms libtool libxml2-dev swig uuid-dev}
@@ -31,3 +29,5 @@ namespace :dev do
     install_pkg(tools)
   end
 end
+
+task :dev => ["dev:essential", "dev:language", "dev:web", "dev:zip", "dev:tools"]
