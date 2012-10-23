@@ -105,7 +105,8 @@ def install_tar(url, version, ext="tar.gz", dir="/tmp")
       _download_tar(url, tarfile)
 
       FileUtils.cd(version) do
-        sh("./configure && make && sudo make install")
+        sh("./configure") if File.exists?("configure")
+        sh("make && sudo make install") unless Dir.glob("[Mm]akefile").empty?
       end
     ensure
       FileUtils.rm(tarfile, :verbose => true)
