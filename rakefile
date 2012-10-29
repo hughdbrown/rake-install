@@ -68,13 +68,13 @@ end
 
 def install_gems(gems)
   all_gems = "#{gems.sort.join(' ')}"
-  sh("gem install #{all_gems}")
+  sh("sudo gem install #{all_gems}")
   notice("Installed #{all_gems}")
 end
 
 def upgrade_gems(gems)
   all_gems = "#{gems.sort.join(' ')}"
-  sh("gem install -u #{all_gems}")
+  sh("sudo gem install -u #{all_gems}")
   notice("Upgraded #{all_gems}")
 end
 

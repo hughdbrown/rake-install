@@ -38,7 +38,7 @@ namespace :vim do
   end
 
   desc "Install vim"
-  task :vim-spf13 => ["vim"] do
+  task :vim_spf13 => ["vim"] do
     #pkgs = %w{vim}
     #install_pkg(pkgs)
     FileUtils.cd(ENV["HOME"]) do
