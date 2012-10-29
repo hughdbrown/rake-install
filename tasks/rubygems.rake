@@ -28,13 +28,20 @@ namespace :rubygems do
     vagrant
   }.sort
 
+  desc "Install ruby-dev prerequisite"
+  # If you do not install this, you will get 'mkmf not found' errors
+  task :ruby_dev do
+    pkg = %w{ ruby1.9.1-dev }
+    install_pkg(pkg)
+  end
+
   desc "Install ruby gems"
-  task :install do
+  task :install => [":ruby_dev"] do
     install_gems(gems)
   end
   
   desc "Upgrade ruby gems"
-  task :upgrade do
+  task :upgrade => [":ruby_dev"] do
     upgrade_gems(gems)
   end
 end
