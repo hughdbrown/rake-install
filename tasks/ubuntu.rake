@@ -6,7 +6,7 @@ namespace :ubuntu do
   desc "Install cinnamon library"
   task :cinnamon do
     # ppa = "ppa:merlwiz79/cinnamon-ppa"
-    ppa = "gwendal-lebihan-dev/cinnamon-stable"
+    ppa = "ppa:gwendal-lebihan-dev/cinnamon-stable"
     install_ppa(ppa)
     cinnamon_packages = %w{cinnamon cinnamon-session cinnamon-settings libmuffin0 gir1.2-muffin-3.0}
     install_pkg(cinnamon_packages)
