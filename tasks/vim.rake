@@ -23,7 +23,7 @@ namespace :vim do
       }
       colorscheme = colorschemes[cs]
       if colorscheme
-        FileUtils.cd("~/.vim/bundle/vim-colorschemes/colors") do
+        FileUtils.cd("#{ENV['HOME']}/.vim/bundle/vim-colorschemes/colors") do
           sh("wget #{colorscheme}")
         end
       end
@@ -33,9 +33,15 @@ namespace :vim do
 
   desc "Install vim"
   task :vim do
+    pkg = %w{ vim }
+    install_pkg(pkg)
+  end
+
+  desc "Install vim"
+  task :vim-spf13 => ["vim"] do
     #pkgs = %w{vim}
     #install_pkg(pkgs)
-    FileUtils.cd("~") do
+    FileUtils.cd(ENV["HOME"]) do
       sh("curl http://j.mp/spf13-vim3 -L -o - | sh")
       
       # Install clouds-mignight colorscheme
@@ -68,6 +74,6 @@ namespace :vim do
   #end
 end
 
-task :vim => ["vim:vim"] # , "vim:vimtools"]
+task :vim => ["vim:vim", "vim:vim_spf13"] # , "vim:vimtools"]
 
  
