@@ -1,13 +1,13 @@
 namespace :dev do
   desc "Install dev tools"
   task :tools do
-    tools = %w{dkms libtool libxml2-dev swig uuid-dev ack-grep meld alien tree xclip pidgin }
+    tools = %w{libxml2-dev swig uuid-dev ack-grep meld alien tree xclip pidgin multitail }
     install_pkg(tools)
   end
 
   desc "Install essential tools"
   task :essential do
-    tools = %w{build-essential autogen autoconf automake ubuntu-dev-tools}
+    tools = %w{build-essential autogen autoconf automake ubuntu-dev-tools dkms libtool }
     install_pkg(tools)
   end
 
@@ -30,4 +30,5 @@ namespace :dev do
   end
 end
 
+desc "Install all dev tools"
 task :dev => ["dev:essential", "dev:language", "dev:web", "dev:zip", "dev:tools"]
