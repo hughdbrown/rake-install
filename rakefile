@@ -79,12 +79,15 @@ def upgrade_gems(gems)
 end
 
 def _download_tar(url, tarfile)
-  sh("wget #{url} -O #{tarfile} && tar xvfz #{tarfile}") unless FileUtils.exists(tarfile)
+  notice("Downloading tarfile #{tarfile}")
+  sh("wget #{url} -O #{tarfile}") unless File.exists?(tarfile)
+  
+  notice("Untarring tarfile #{tarfile}")
+  sh("tar xvfz #{tarfile}") if File.exists?(tarfile)
 end
 
 def download_tar(url, version, target, ext="tar.gz", dir="/tmp")
   tarfile = "#{version}.#{ext}"
-  notice("Downloading tarfile #{tarfile}")
   pwd = FileUtils.pwd()
   
   FileUtils.cd(dir) do
@@ -123,6 +126,12 @@ def install_deb(url, debfile, dir="/tmp")
   ensure
     FileUtils.rm(debfile) if File.exists?(debfile)
   end
+end
+
+def pip_install_pkg(pkg)
+  all_apps = "#{pkg.join(' ')}"
+  notice("pip-installing #{all_apps}")
+  sh("sudo pip install #{all_apps}")
 end
 
 #-----------------------------------------------------

@@ -6,7 +6,7 @@ namespace :mongo do
   end
 
   desc "Latest mongo"
-  task :mongo_latest do
+  task :mongo_latest => [:mongo] do
     version = "mongodb-linux-i686-2.2.0"
     url = "http://fastdl.mongodb.org/linux/#{version}.tgz"
     install_tar(url, version)
