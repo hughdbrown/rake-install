@@ -1,7 +1,7 @@
 namespace :dev do
   desc "Install dev tools"
   task :tools do
-    tools = %w{dkms libtool libxml2-dev swig uuid-dev}
+    tools = %w{dkms libtool libxml2-dev swig uuid-dev ack-grep meld alien tree xclip pidgin }
     install_pkg(tools)
   end
 

@@ -79,7 +79,7 @@ def upgrade_gems(gems)
 end
 
 def _download_tar(url, tarfile)
-  sh("wget #{url} -O #{tarfile} && tar xvfz #{tarfile}")
+  sh("wget #{url} -O #{tarfile} && tar xvfz #{tarfile}") unless FileUtils.exists(tarfile)
 end
 
 def download_tar(url, version, target, ext="tar.gz", dir="/tmp")
