@@ -24,7 +24,7 @@ namespace :vim do
   task :vim_spf13 => ["vim"] do
     #pkgs = %w{vim}
     #install_pkg(pkgs)
-    FileUtils.cd("#{ENV['HOME']"}) do
+    FileUtils.cd("#{ENV['HOME']}") do
       sh("curl http://j.mp/spf13-vim3 -L -o - | sh")
 
       # Install clouds-mignight colorscheme

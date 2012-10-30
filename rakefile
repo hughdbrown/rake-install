@@ -47,18 +47,20 @@ end
 #-----------------------------------------------------
 # Installation methods
 #-----------------------------------------------------
+
+TARCMD = {
+    "tar.gz" => "xvfz",
+    "tar.bz2" => "xvfj"
+}
+
 def install_pkg(apps)
-  #apps.each { |app| sh("sudo apt-get -y install #{app}") }
-  all_apps = "#{apps.join(' ')}"
-  notice("Installing #{all_apps}")
-  sh("sudo apt-get -y install #{all_apps}")
+  notice("Installing #{apps.join(' ')}")
+  sh("sudo apt-get -y install #{apps.join(' ')}")
 end
 
 def remove_pkg(apps)
-  #apps.each { |app| sh("sudo apt-get -y install #{app}") }
-  all_apps = "#{apps.join(' ')}"
-  notice("Removing #{all_apps}")
-  sh("sudo apt-get -y remove #{all_apps}")
+  notice("Removing #{apps.join(' ')}")
+  sh("sudo apt-get -y remove #{apps.join(' ')}")
 end
 
 def install_ppa(ppa)
@@ -78,21 +80,22 @@ def upgrade_gems(gems)
   notice("Upgraded #{all_gems}")
 end
 
-def _download_tar(url, tarfile)
+def _download_tar(url, tarfile, tarcmd="xvfz")
   notice("Downloading tarfile #{tarfile}")
   sh("wget #{url} -O #{tarfile}") unless File.exists?(tarfile)
   
   notice("Untarring tarfile #{tarfile}")
-  sh("tar xvfz #{tarfile}") if File.exists?(tarfile)
+  sh("tar #{tarcmd} #{tarfile}") if File.exists?(tarfile)
 end
 
 def download_tar(url, version, target, ext="tar.gz", dir="/tmp")
   tarfile = "#{version}.#{ext}"
+  tarcmd = TARCMD[ext]
   pwd = FileUtils.pwd()
   
   FileUtils.cd(dir) do
     begin
-      _download_tar(url, tarfile)
+      _download_tar(url, tarfile, tarcmd)
     ensure
       FileUtils.mv(target, pwd, :verbose => true) if File.exists?(target)
       FileUtils.rm(tarfile, :verbose => true) if File.exists?(tarfile)
@@ -102,10 +105,11 @@ end
 
 def install_tar(url, version, ext="tar.gz", dir="/tmp")
   tarfile = "#{version}.#{ext}"
+  tarcmd = TARCMD[ext]
   notice("Installing tarfile #{tarfile}")
   FileUtils.cd(dir) do
     begin
-      _download_tar(url, tarfile)
+      _download_tar(url, tarfile, tarcmd)
 
       FileUtils.cd(version) do
         sh("./configure") if File.exists?("configure")
@@ -129,14 +133,6 @@ def install_deb(url, debfile, dir="/tmp")
 end
 
 def pip_install_pkg(pkg)
-  all_apps = "#{pkg.join(' ')}"
-  notice("pip-installing #{all_apps}")
-  sh("sudo pip install #{all_apps}")
-end
-
-#-----------------------------------------------------
-# Additional Configuration
-#-----------------------------------------------------
-def mac?
-  return RUBY_PLATFORM.include? 'darwin'
+  notice("pip-installing #{pkg.join(' ')}")
+  sh("sudo pip install #{pkg.join(' ')}")
 end
