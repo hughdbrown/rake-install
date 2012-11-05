@@ -36,12 +36,12 @@ namespace :rubygems do
   end
 
   desc "Install ruby gems"
-  task :install => [":ruby_dev"] do
+  task :install => [:ruby_dev] do
     install_gems(gems)
   end
   
   desc "Upgrade ruby gems"
-  task :upgrade => [":ruby_dev"] do
+  task :upgrade => [:ruby_dev] do
     upgrade_gems(gems)
   end
 end
