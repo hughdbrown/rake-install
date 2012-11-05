@@ -1,7 +1,9 @@
 namespace :redis do
   desc "Install redis library"
   task :redis do
-    install_tar("http://redis.googlecode.com/files/redis-2.6.0.tar.gz", "redis-2.6.0")
+    version = "redis-2.6.0"
+    url = "http://redis.googlecode.com/files/#{version}.tar.gz" 
+    install_tar(url, version)
   end
 end
 

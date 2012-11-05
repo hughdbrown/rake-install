@@ -8,7 +8,7 @@ namespace :dev do
   end
 
   task :parallel => ["dev:libbz2"] do
-    install_tar(PARALLEL_URL, PARALLEL_VERSION, ext="tar.bz2")
+    install_tar(PARALLEL_URL, PARALLEL_VERSION, {:ext => "tar.bz2"})
   end
 
   desc "Install dev tools"

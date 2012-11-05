@@ -90,14 +90,15 @@ def _download_tar(url, tarfile, tarcmd="xvfz")
   sh("tar #{tarcmd} #{tarfile}") if File.exists?(tarfile)
 end
 
-def download_tar(url, version, target, ext="tar.gz", dir=TMP_DIR)
+def download_tar(url, version, target, ext="tar.gz", dir=TMP_DIR, block=nil)
   tarfile = "#{version}.#{ext}"
   tarcmd = TARCMD[ext]
   pwd = FileUtils.pwd()
-  
+
   FileUtils.cd(dir) do
     begin
       _download_tar(url, tarfile, tarcmd)
+      block.call() unless block.nil?
     ensure
       FileUtils.mv(target, pwd, :verbose => true) if File.exists?(target)
       FileUtils.rm(tarfile, :verbose => true) if File.exists?(tarfile)
@@ -105,7 +106,11 @@ def download_tar(url, version, target, ext="tar.gz", dir=TMP_DIR)
   end
 end
 
-def install_tar(url, version, ext="tar.gz", dir=TMP_DIR)
+def install_tar(url, version, options={})
+  ext = options[:ext] || "tar.gz"
+  dir = options[:dir] || TMP_DIR
+  block = options[:block]
+
   tarfile = "#{version}.#{ext}"
   tarcmd = TARCMD[ext]
   notice("Installing tarfile #{tarfile}")
