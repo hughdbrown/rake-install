@@ -11,7 +11,7 @@ namespace :python do
     pypy_version = "pypy-1.9"
     bzfile = "#{pypy_version}-linux.tar.bz2"
 
-    FileUtils.cd("/tmp") do
+    FileUtils.cd(TMP_DIR) do
       begin
         sh("wget https://bitbucket.org/pypy/pypy/downloads/#{bzfile}")
         sh("tar xvfj #{bzfile}")

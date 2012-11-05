@@ -1,7 +1,7 @@
 namespace :git do
   desc "Install libgit2 library"
   task :libgit2 do
-    FileUtils.cd("/tmp") do
+    FileUtils.cd(TMP_DIR) do
       if FileUtils.exists?("lib2git")
         sh("git pull")
       else

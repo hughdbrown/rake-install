@@ -18,7 +18,8 @@ namespace :vim do
 
   desc "Install vim"
   task :vim do
-    pkg = %w{ vim }
+    # Use vim-gnome because the usual vim on Ubuntu does not have clipboard support
+    pkg = %w{ vim-gnome }
     install_pkg(pkg)
   end
 

@@ -1,6 +1,5 @@
 namespace :nginx do
   NGINX_VER = "nginx-1.3.7"
-  TMP_DIR = "/tmp"
 
   desc "Make nginx prerequisites"
   task :prereq do
@@ -42,7 +41,7 @@ namespace :nginx do
 
   desc "Test pagespeed"
   task :pagespeed_test => [:pagespeed] do
-    FileUtils.cd("#{TMP_DIR}/mod_pagespeed/src") do
+    FileUtils.cd(File.join(TMP_DIR, "mod_pagespeed", "src")) do
       sh("make BUILDTYPE=Release mod_pagespeed_test pagespeed_automatic_test")
       sh("./out/Release/mod_pagespeed_test")
       sh("./out/Release/pagespeed_automatic_test")
@@ -52,7 +51,7 @@ namespace :nginx do
 
   desc "Compile pagespeed"
   task :pagespeed_compile => [:pagespeed] do
-    FileUtils.cd("#{TMP_DIR}/mod_pagespeed/src") do
+    FileUtils.cd(File.join(TMP_DIR, "mod_pagespeed", "src")) do
       sh("make BUILDTYPE=Release")
       FileUtils.cd("#{TMP_DIR}/mod_pagespeed/src/net/instaweb/automatic") do
         sh("make all")
@@ -63,7 +62,7 @@ namespace :nginx do
 
   desc "Install pagespeed"
   task :pagespeed_install => [:pagespeed_compile] do
-    FileUtils.cd("#{TMP_DIR}/mod_pagespeed/src/install") do
+    FileUtils.cd(File.join(TMP_DIR, "mod_pagespeed", "src")) do
       sh("./ubuntu.sh staging")
       sh("sudo ./ubuntu.sh install")
       #sh("sudo ./ubuntu.sh stop start")

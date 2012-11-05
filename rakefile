@@ -10,6 +10,8 @@ require 'rake/clean'
 #require 'rubygems'
 #require 'json'
 
+TMP_DIR = "/tmp"
+
 # Load other rake tasks
 Dir.glob('tasks/*.rake') {|f| load(f) }
 
@@ -88,7 +90,7 @@ def _download_tar(url, tarfile, tarcmd="xvfz")
   sh("tar #{tarcmd} #{tarfile}") if File.exists?(tarfile)
 end
 
-def download_tar(url, version, target, ext="tar.gz", dir="/tmp")
+def download_tar(url, version, target, ext="tar.gz", dir=TMP_DIR)
   tarfile = "#{version}.#{ext}"
   tarcmd = TARCMD[ext]
   pwd = FileUtils.pwd()
@@ -103,7 +105,7 @@ def download_tar(url, version, target, ext="tar.gz", dir="/tmp")
   end
 end
 
-def install_tar(url, version, ext="tar.gz", dir="/tmp")
+def install_tar(url, version, ext="tar.gz", dir=TMP_DIR)
   tarfile = "#{version}.#{ext}"
   tarcmd = TARCMD[ext]
   notice("Installing tarfile #{tarfile}")
@@ -121,7 +123,7 @@ def install_tar(url, version, ext="tar.gz", dir="/tmp")
   end
 end
 
-def install_deb(url, debfile, dir="/tmp")
+def install_deb(url, debfile, dir=TMP_DIR)
   notice("Installing debfile #{debfile}")
   begin
     FileUtils.cd(dir) do

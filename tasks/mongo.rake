@@ -10,7 +10,10 @@ namespace :mongo do
     version = "mongodb-linux-i686-2.2.1"
     url = "http://fastdl.mongodb.org/linux/#{version}.tgz"
     install_tar(url, version)
+    FileUtils.cd(File.join(TMP_DIR, version, "bin")) do
+      sh("sudo mv * /usr/bin/.")
+    end
   end
 end
 
-task :mongo => ["mongo:mongo", "mongo:mongo_latest"]
+task :mongo => ["mongo:mongo_latest"]
