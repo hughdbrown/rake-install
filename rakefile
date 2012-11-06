@@ -121,6 +121,7 @@ def install_tar(url, version, options={})
       FileUtils.cd(version) do
         sh("./configure") if File.exists?("configure")
         sh("make && sudo make install") unless Dir.glob("[Mm]akefile").empty?
+        block.call if block
       end
     ensure
       FileUtils.rm(tarfile, :verbose => true)
