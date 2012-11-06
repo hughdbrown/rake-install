@@ -3,7 +3,11 @@ namespace :redis do
   task :redis do
     version = "redis-2.6.0"
     url = "http://redis.googlecode.com/files/#{version}.tar.gz" 
-    install_tar(url, version)
+    b = Proc.new {
+      FileUtils.cd("utils")
+      sh("sudo ./install_server.sh")
+    }
+    install_tar(url, version, {:block => b})
   end
 end
 
