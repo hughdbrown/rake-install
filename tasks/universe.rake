@@ -1,6 +1,6 @@
 namespace :universe do
   task :universe => ["security", "extra", "system"] do
-    notify("Installed the universe")
+    notice("Installed the universe")
   end
 end
 
