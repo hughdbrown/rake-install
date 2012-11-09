@@ -5,7 +5,8 @@ namespace :node do
   end
 
   task :libjpeg_turbo do
-    install_deb(url, deb)
+    pkg = %w{ libjpeg62-dev }
+    install_pkg(pkg)
   end
 
   #desc "Install node binary"
