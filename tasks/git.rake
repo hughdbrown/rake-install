@@ -2,14 +2,12 @@ namespace :git do
   #desc "Install libgit2 library"
   task :libgit2 do
     FileUtils.cd(TMP_DIR) do
-      if File.exists?("lib2git")
-        sh("git pull")
-      else
-        sh("git clone git://github.com/libgit2/libgit2.git")
-      end
+      sh("git clone git://github.com/libgit2/libgit2.git") unless Dir.exists?("libgit2")
 
-      FileUtils.mkdir("libgit2/build") unless FileUtils.exists?("libgit2/build")
-      FileUtils.cd("libgit2/build") do
+      build_dir = "libgit2/build"
+      FileUtils.mkdir(build_dir) unless Dir.exists?(build_dir)
+      FileUtils.cd(build_dir) do
+        sh("git pull")
         sh("cmake .. && cmake --build .")
       end
     end
