@@ -1,8 +1,8 @@
 namespace :universe do
-  task :universe => ["system:file_systems", "ssh:open_ssh_server", "security", "extra", "dev", "git", "vim", "rubygems", "webserver"] do
+  task :universe => ["security", "extra", "system"] do
     notify("Installed the universe")
   end
 end
 
-desc "Install the universe"
+#desc "Install the universe"
 task :universe => ["universe:universe"]

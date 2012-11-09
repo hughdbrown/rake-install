@@ -16,14 +16,14 @@ namespace :vim do
     end
   end
 
-  desc "Install vim"
+  #desc "Install vim"
   task :vim do
     # Use vim-gnome because the usual vim on Ubuntu does not have clipboard support
     pkg = %w{ vim-gnome }
     install_pkg(pkg)
   end
 
-  desc "Install vim"
+  #desc "Install vim-spf13"
   task :vim_spf13 => ["vim"] do
     FileUtils.cd(HOME) do
       sh("curl http://j.mp/spf13-vim3 -L -o - | sh") unless File.exists?(".vimrc-bundles")
@@ -36,5 +36,5 @@ namespace :vim do
   end
 end
 
-task :vim => ["vim:vim", "vim:vim_spf13"] # , "vim:vimtools"]
+task :vim => ["vim:vim", "vim:vim_spf13"]
 

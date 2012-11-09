@@ -1,12 +1,12 @@
 namespace :python do
-  desc "Install python binary"
+  #desc "Install python binary"
   task :cpython do
     version = "Python-3.3.0"
     url = "http://python.org/ftp/python/3.3.0/#{version}.tgz"
     install_tar(url, version, {:ext => "tgz"})
   end
 
-  desc "Install pypy binary"
+  #desc "Install pypy binary"
   task :pypy do
     pypy_version = "pypy-1.9"
     bzfile = "#{pypy_version}-linux.tar.bz2"

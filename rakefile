@@ -14,6 +14,7 @@ TMP_DIR = "/tmp"
 
 # Load other rake tasks
 Dir.glob('tasks/*.rake') {|f| load(f) }
+Dir.glob('configs/*.rake') {|f| load(f) }
 
 #-----------------------------------------------------
 # Helper methods

@@ -8,7 +8,7 @@ namespace :virtualenv do
     sh("curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | sudo python")
   end
 
-  desc "Install basic tools"
+  #desc "Install basic tools"
   task :virtualenv => ["virtualenv:pip"] do
     notice("Installing virtualenv")
 
@@ -20,5 +20,5 @@ namespace :virtualenv do
   end
 end
 
-desc "All virtualenv tasks"
+#desc "All virtualenv tasks"
 task :virtualenv => ["virtualenv:virtualenv"]

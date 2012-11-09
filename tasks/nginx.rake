@@ -1,14 +1,14 @@
 namespace :nginx do
   NGINX_VER = "nginx-1.3.7"
 
-  desc "Make nginx prerequisites"
+  #desc "Make nginx prerequisites"
   task :prereq do
     tools = %w{zlib1g zlib1g-dev libpcre3 libpcre3-dev openssl}
     install_pkg(tools)
     notice("Installed nginx prerequisites")
   end
 
-  desc "Make mod_wsgi"
+  #desc "Make mod_wsgi"
   task :mod_wsgi do
     FileUtils.cd(TMP_DIR) do
       sh("hg clone http://bitbucket.org/lifeeth/mod_wsgi/")
@@ -18,7 +18,7 @@ namespace :nginx do
     end
   end
 
-  desc "Make pagespeed"
+  #desc "Make pagespeed"
   task :pagespeed do
     # From:
     #  https://developers.google.com/speed/docs/mod_pagespeed/build_from_source
@@ -39,7 +39,7 @@ namespace :nginx do
     notice("Built pagespeed")
   end
 
-  desc "Test pagespeed"
+  #desc "Test pagespeed"
   task :pagespeed_test => [:pagespeed] do
     FileUtils.cd(File.join(TMP_DIR, "mod_pagespeed", "src")) do
       sh("make BUILDTYPE=Release mod_pagespeed_test pagespeed_automatic_test")
@@ -49,7 +49,7 @@ namespace :nginx do
     notice("Tested pagespeed")
   end
 
-  desc "Compile pagespeed"
+  #desc "Compile pagespeed"
   task :pagespeed_compile => [:pagespeed] do
     FileUtils.cd(File.join(TMP_DIR, "mod_pagespeed", "src")) do
       sh("make BUILDTYPE=Release")
@@ -60,7 +60,7 @@ namespace :nginx do
     notice("Compiled pagespeed")
   end
 
-  desc "Install pagespeed"
+  #desc "Install pagespeed"
   task :pagespeed_install => [:pagespeed_compile] do
     FileUtils.cd(File.join(TMP_DIR, "mod_pagespeed", "src")) do
       sh("./ubuntu.sh staging")
@@ -69,7 +69,7 @@ namespace :nginx do
     end
   end
 
-  desc "Make mod_pagespeed"
+  #desc "Make mod_pagespeed"
   task :mod_pagespeed => [:pagespeed, :pagespeed_test, :pagespeed_compile, :pagespeed_install] do
     FileUtils.cd(TMP_DIR) do
       sh("git clone git://github.com/pagespeed/ngx_pagespeed.git")
@@ -77,7 +77,7 @@ namespace :nginx do
     end
   end
 
-  desc "install nginx source"
+  #desc "install nginx source"
   task :nginx_src do
     FileUtils.cd(TMP_DIR) do
       sh("wget http://nginx.org/download/#{NGINX_VER}.tar.gz && tar xvfz #{NGINX_VER}.tar.gz && cd #{NGINX_VER}")
@@ -90,7 +90,7 @@ namespace :nginx do
     end
   end
 
-  desc "Install nginx binary"
+  #desc "Install nginx binary"
   task :nginx => [:prereq, :mod_wsgi, :mod_pagespeed, :nginx_src] do
     FileUtils.cd(TMP_DIR) do
       begin

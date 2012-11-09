@@ -1,5 +1,5 @@
 namespace :git do
-  desc "Install libgit2 library"
+  #desc "Install libgit2 library"
   task :libgit2 do
     FileUtils.cd(TMP_DIR) do
       if File.exists?("lib2git")
@@ -15,14 +15,14 @@ namespace :git do
     end
   end
 
-  desc "Install git binary"
+  #desc "Install git binary"
   task :bin do
     version = "git-1.8.0"
     url = "https://git-core.googlecode.com/files/#{version}.tar.gz"
     install_tar(url, version)
   end
 
-  desc "Install git utilities"
+  #desc "Install git utilities"
   task :util do
     tools = %w{gitg gitk gitstats tig}
     install_pkg(tools)

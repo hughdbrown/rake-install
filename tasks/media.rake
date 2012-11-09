@@ -10,7 +10,7 @@
 #./install-skype.sh
 
 namespace :media do
-    desc "Install media tools"
+    #desc "Install media tools"
     task :media do
         # irssi IRC terminal-based client
         # http://www.techdrivein.com/2010/07/irssi-really-good-terminal-based-irc.html
@@ -19,6 +19,6 @@ namespace :media do
     end
 end
 
-desc "Install all media"
+#desc "Install all media"
 task :media => ["media:media"]
 
