@@ -21,6 +21,12 @@ namespace :webserver do
     tools = %w{cherokee libcherokee-mod-admin spawn-fcgi libcherokee-mod-libssl libcherokee-mod-mysql libcherokee-mod-rrd}
     install_pkg(tools)
   end
+
+  #task :pancake do
+  #  url = "http://github.com/pp3345/Pancake/tarball/1.1"
+  #  version = "pp3345-Pancake-6975db6"
+  #  install_tar(url, version)
+  #end
 end
 
 #desc "Install webservers"
