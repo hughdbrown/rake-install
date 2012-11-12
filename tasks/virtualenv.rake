@@ -1,4 +1,6 @@
 namespace :virtualenv do
+  VIRTUALENV_HOME = File.join(HOME, ".virtualenvs")
+
   task :setuptools do
     pkg = %w{ python-setuptools }
     install_pkg(pkg)
@@ -15,7 +17,7 @@ namespace :virtualenv do
     pip_pkg = %w{ virtualenvwrapper }
     pip_install_pkg(pip_pkg)
 
-    env_hooks = "#{ENV['HOME']}/.virtualenvs/env_hooks"
+    env_hooks = File.join(VIRTUALENV_HOME, "env_hooks")
     FileUtils.mkdir_p(env_hooks) unless File.exists?(env_hooks)
   end
 end

@@ -1,5 +1,4 @@
 namespace :vim do
-  HOME = ENV['HOME']
   COLORSCHEMES = {
     "clouds-midnight" => "http://darcsden.com/alex/dotfiles/raw/.vim/colors/clouds-midnight.vim"
   }

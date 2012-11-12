@@ -1,3 +1,3 @@
 desc "Install desktop machine"
-task :Desktop => ["universe", "media:media", "ubuntu:cinnamon"]
+task :Desktop => ["universe", "media", "ubuntu:cinnamon"]
 
