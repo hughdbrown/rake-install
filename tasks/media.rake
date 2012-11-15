@@ -39,8 +39,19 @@ namespace :media do
   task :hosts do
     sh("wget -O- http://winhelp2002.mvps.org/hosts.txt | sudo tee -a /etc/hosts")
   end
+
+  task :pidgin do
+    pkgs = %w{ pidgin }
+    install_pkgs(pkgs)
+  end
+
+  task :adobe_reader do
+    deb = "AdbeRdr9.5.1-1_i386linux_enu.deb"
+    url = "wget ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.1/enu/#{deb}"
+    install_deb(url, deb)
+  end
 end
 
 #desc "Install all media"
-task :media => ["media:irssi", "media:abcde", "media:brasero", "media:hosts"]
+task :media => ["media:irssi", "media:abcde", "media:brasero", "media:hosts", "media:pidgin", "media:adobe_reader"]
 
