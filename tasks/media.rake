@@ -35,8 +35,12 @@ namespace :media do
     pkgs = %w{ brasero }
     install_pkg(pkgs)  
   end
+
+  task :hosts do
+    sh("wget -O- http://winhelp2002.mvps.org/hosts.txt | sudo tee -a /etc/hosts")
+  end
 end
 
 #desc "Install all media"
-task :media => ["media:irssi", "media:abcde", "media:brasero"]
+task :media => ["media:irssi", "media:abcde", "media:brasero", "media:hosts"]
 
