@@ -12,9 +12,14 @@ namespace :system do
   #  install_pkg(tools)
   #end
 
+  task :curl do
+    tools = %w{libcurl3 libcurl3-gnutls libcurl4-openssl-dev}
+    install_pkg(tools)    
+  end
+
   task :file_system_lib do
     # libcurl4-nss-dev 
-    tools = %w{libfuse2 libfuse-dev libattr1-dev libcurl4-openssl-dev libxml2 libxml2-dev}
+    tools = %w{libfuse2 libfuse-dev libattr1-dev libxml2 libxml2-dev}
     install_pkg(tools)
   end
 
@@ -25,4 +30,4 @@ namespace :system do
   end
 end
 
-task :system => ["system:libnotify", "system:file_systems"]
+task :system => ["system:libnotify", "system:file_systems", "system:curl"]
