@@ -20,7 +20,7 @@ namespace :dev do
 
   #desc "Install essential tools"
   task :essential do
-    tools = %w{build-essential autogen autoconf automake ubuntu-dev-tools dkms libtool }
+    tools = %w{build-essential autogen autoconf automake ubuntu-dev-tools dkms libtool cmake }
     install_pkg(tools)
   end
 
