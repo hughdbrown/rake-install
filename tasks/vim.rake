@@ -25,13 +25,13 @@ namespace :vim do
   #desc "Install vim-spf13"
   task :vim_spf13 => ["vim"] do
     FileUtils.cd(HOME) do
-      unless File.exists?(".spf13-vim-3") do
-          sh("curl http://j.mp/spf13-vim3 -L -o - | sh") unless File.exists?(".vimrc-bundles")
+      unless File.exists?(".spf13-vim-3")
+        sh("curl http://j.mp/spf13-vim3 -L -o - | sh") unless File.exists?(".vimrc-bundles")
 
-          # Install clouds-mignight COLORSCHEMES
-          install_colorscheme(:clouds_midnight)
+        # Install clouds-midnight COLORSCHEMES
+        install_colorscheme(:clouds_midnight)
 
-          notice("Installed vim spf13")
+        notice("Installed vim spf13")
       end
     end
   end
