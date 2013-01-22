@@ -30,5 +30,9 @@ namespace :webserver do
 end
 
 #desc "Install webservers"
-task :webserver => ["webserver:apache", "webserver:nginx", "webserver:cherokee"]
+task :webserver => [
+    "webserver:apache", 
+    "webserver:nginx", 
+    #"webserver:cherokee"
+]
 
