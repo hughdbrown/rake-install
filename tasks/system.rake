@@ -13,8 +13,8 @@ namespace :system do
   #end
 
   task :curl do
-    tools = %w{libcurl3 libcurl3-gnutls libcurl4-openssl-dev}
-    install_pkg(tools)    
+    tools = %w{libcurl3 libcurl3-gnutls libcurl4-openssl-dev curl}
+    install_pkg(tools)
   end
 
   task :file_system_lib do

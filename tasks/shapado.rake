@@ -2,7 +2,7 @@ namespace :shapado do
   WORKSPACE = "~/workspace"
    
   #desc "Install shapado"
-  task :shapado => ["ruby:install"] do
+  task :shapado => ["ruby:install", "git:bin"] do
     pkgs = %w{
       libqt4-dev
       qt4-qmake

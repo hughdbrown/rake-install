@@ -32,7 +32,7 @@ namespace :dev do
 
   #desc "Install web tools"
   task :web do
-    tools = %w{curl pngcrush}
+    tools = %w{pngcrush}
     install_pkg(tools)
   end
 

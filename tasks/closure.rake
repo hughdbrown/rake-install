@@ -2,7 +2,7 @@ namespace :closure do
     TMP_PLOVR_DIR =  File.join(TMP_DIR, "plovr")
     ANT_BUILD_FILE = File.join(TMP_PLOVR_DIR, "build.xml")
 
-    file ANT_BUILD_FILE do
+    file ANT_BUILD_FILE => ["mercurial:bin"] do
         FileUtils.cd(TMP_DIR) do
             sh("hg clone https://plovr.googlecode.com/hg/ plovr")
         end

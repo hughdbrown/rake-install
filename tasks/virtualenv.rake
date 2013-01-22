@@ -6,7 +6,7 @@ namespace :virtualenv do
     install_pkg(pkg)
   end
 
-  task :pip => ["virtualenv:setuptools"] do
+  task :pip => ["virtualenv:setuptools", "system:curl"] do
     sh("curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | sudo python")
   end
 

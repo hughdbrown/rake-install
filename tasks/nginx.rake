@@ -1,5 +1,5 @@
 namespace :nginx do
-  NGINX_VER = "nginx-1.3.8"
+  NGINX_VER = "nginx-1.3.11"
 
   #desc "Make nginx prerequisites"
   task :prereq do
@@ -9,7 +9,7 @@ namespace :nginx do
   end
 
   #desc "Make mod_wsgi"
-  task :mod_wsgi do
+  task :mod_wsgi => ["mercurial:bin"] do
     FileUtils.cd(TMP_DIR) do
       sh("hg clone http://bitbucket.org/lifeeth/mod_wsgi/")
       sh("cd mod_wsgi")
@@ -70,7 +70,7 @@ namespace :nginx do
   end
 
   #desc "Make mod_pagespeed"
-  task :mod_pagespeed => [:pagespeed, :pagespeed_test, :pagespeed_compile, :pagespeed_install] do
+  task :mod_pagespeed => [:pagespeed, :pagespeed_test, :pagespeed_compile, :pagespeed_install, "git:bin"] do
     FileUtils.cd(TMP_DIR) do
       sh("git clone git://github.com/pagespeed/ngx_pagespeed.git")
       notice("Built mod_pagespeed")
