@@ -1,7 +1,7 @@
 namespace :python do
 
   task :pip do
-    pkgs = %w(python-pip)
+    pkgs = %w{python-pip}
     install_pkg(pkgs)
     sh("sudo pip install virtualenv virtualenvwrapper")
   end
