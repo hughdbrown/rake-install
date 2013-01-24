@@ -1,6 +1,6 @@
 namespace :git do
   #desc "Install libgit2 library"
-  task :libgit2 => ["dev:essentials"] do
+  task :libgit2 => ["dev:essential"] do
     FileUtils.cd(TMP_DIR) do
       sh("git clone git://github.com/libgit2/libgit2.git") unless Dir.exists?("libgit2")
 

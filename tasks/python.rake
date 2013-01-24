@@ -1,4 +1,11 @@
 namespace :python do
+
+  task :pip do
+    pkgs = %w(python-pip)
+    install_pkg(pkgs)
+    sh("sudo pip install virtualenv virtualenvwrapper")
+  end
+
   #desc "Install python binary"
   task :cpython do
     version = "Python-3.3.0"
