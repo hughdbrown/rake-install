@@ -1,5 +1,7 @@
 namespace :virtualenv do
   VIRTUALENV_HOME = File.join(HOME, ".virtualenvs")
+  BIN = File.join(HOME, "bin")
+  HUB = File.join(BIN, "hub")
 
   task :setuptools do
     pkg = %w{ python-setuptools }
@@ -10,8 +12,15 @@ namespace :virtualenv do
     sh("curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | sudo python")
   end
 
+  task :hub do
+    notice("Installing hub")
+    url = "http://defunkt.io/hub/standalone"
+    sh("curl #{url} -sLo #{HUB}")
+    sh("chmod +x #{HUB}")
+  end
+
   #desc "Install basic tools"
-  task :virtualenv => ["virtualenv:pip"] do
+  task :virtualenv => ["virtualenv:pip", "virtualenv:hub"] do
     notice("Installing virtualenv")
 
     pip_pkg = %w{ virtualenvwrapper }
