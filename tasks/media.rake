@@ -16,7 +16,7 @@ namespace :media do
       sh("wget --output-file=spring.theme http://www.irssi.org/themefiles/spring.theme")
     end
   end
-  
+
   task :handbrake do
     install_ppa("ppa:stebbins/handbrake-snapshots")
     pkgs = %w{ handbrake-gtk handbrake-cli }
@@ -32,12 +32,12 @@ namespace :media do
 
   task :abcde do
     pkgs = %w{ abcde lame id3v2 }
-    install_pkg(pkgs)    
+    install_pkg(pkgs)
   end
 
   task :brasero do
     pkgs = %w{ brasero }
-    install_pkg(pkgs)  
+    install_pkg(pkgs)
   end
 
   task :hosts do
@@ -59,11 +59,20 @@ namespace :media do
   end
 
   task :kazam do
-    pkgs = %w(kazam)
+    pkgs = %w{kazam}
     install_pkg(pkgs)
   end
 end
 
 #desc "Install all media"
-task :media => ["media:irssi", "media:handbrake", "media:abcde", "media:brasero", "media:hosts", "media:pidgin", "media:adobe_reader"]
+task :media => [
+    "media:irssi",
+    "media:handbrake",
+    "media:abcde",
+    "media:brasero",
+    "media:hosts",
+    "media:pidgin",
+    "media:adobe_reader",
+    "media:kazam"
+]
 
