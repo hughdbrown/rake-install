@@ -57,6 +57,11 @@ namespace :media do
     url = "ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.1/enu/#{deb}"
     install_deb(url, deb) unless File.exists?("/usr/bin/acroread")
   end
+
+  task :kazam do
+    pkgs = %w(kazam)
+    install_pkg(pkgs)
+  end
 end
 
 #desc "Install all media"
