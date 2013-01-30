@@ -37,5 +37,8 @@ namespace :vim do
   end
 end
 
-task :vim => ["vim:vim", "vim:vim_spf13"]
+task :vim => [
+    "vim:vim",
+    "vim:vim_spf13"
+]
 

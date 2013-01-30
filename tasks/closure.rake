@@ -28,4 +28,7 @@ namespace :closure do
     end
 end
 
-task :closure => ["closure:plovr", "closure:compiler"]
+task :closure => [
+    #"closure:plovr",
+    #"closure:compiler"
+]

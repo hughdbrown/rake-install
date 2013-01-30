@@ -7,7 +7,7 @@ namespace :shapado do
       libqt4-dev
       qt4-qmake
       libxml2 libxml2-dev libxslt1-dev
-      libreadline-dev
+      libreadline6 libreadline6-dev
     }
     install_pkg(pkgs)
     FileUtils.cd(WORKSPACE) do

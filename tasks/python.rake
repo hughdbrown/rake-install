@@ -29,7 +29,7 @@ namespace :python do
 
         if File.exists?(new_dir)
           FileUtils.rm_rf(new_dir, verbose)
-        elif ! File.exists?(dst)
+        elsif ! File.exists?(dst)
           FileUtils.mkdir_p(dst, verbose)
         end
         FileUtils.mv(pypy_version, dst, verbose)
@@ -47,4 +47,7 @@ namespace :python do
   end
 end
 
-task :python => ["python:cpython", "python:pypy"]
+task :python => [
+    #"python:cpython",
+    "python:pypy"
+]

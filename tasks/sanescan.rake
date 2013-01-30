@@ -7,4 +7,6 @@ namespace :sanescan do
     end
 end
 
-task :sanescan => ["sanescan:sanescan"]
+task :sanescan => [
+    #"sanescan:sanescan"
+]

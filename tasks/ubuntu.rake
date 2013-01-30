@@ -36,4 +36,6 @@ namespace :ubuntu do
   end
 end
 
-task :ubuntu => ["ubuntu:cinnamon"]
+task :ubuntu => [
+    #"ubuntu:cinnamon"
+]
