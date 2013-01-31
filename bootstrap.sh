@@ -1,9 +1,9 @@
 #!/bin/sh -e
 
-mkdir ~/bin ~/tmp
+mkdir -p ~/bin ~/tmp
 
-sudo apt-get install lib32stdc++6
-sudo apt-get install python-dev
+sudo apt-get install -y lib32stdc++6
+sudo apt-get install -y python-dev
 
 sudo apt-get install -y curl
 sudo apt-get install -y git zsh 
@@ -13,8 +13,9 @@ sudo apt-get install -y vim vim-gnome
 sudo apt-get install -y python-pip
 sudo pip install virtualenv virtualenvwrapper
 
-sudo apt-get install ruby
-gem install rake rvm
-sudo apt-get install libyaml-dev
-rvm install ruby-1.9.3-p362 --verify-downloads 1
+sudo apt-get install -y libyaml-dev
+sudo apt-get install -y ruby
+sudo gem install rake
+curl -L https://get.rvm.io | bash -s stable --ruby
+rvm install ruby-1.9.3-p374 --verify-downloads 1
 
