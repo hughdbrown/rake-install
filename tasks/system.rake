@@ -25,7 +25,10 @@ namespace :system do
 
   #desc "Install file systems"
   task :file_systems => [:file_system_lib] do
-    tools = %w{fuse-utils smbclient sshfs nfs-common encfs gvfs ecryptfs-utils}
+    tools = %w{
+        fuse-utils smbclient sshfs nfs-common encfs gvfs ecryptfs-utils
+        cifs-utils:i386 cifs-utils
+    }
     install_pkg(tools)
   end
 end

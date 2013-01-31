@@ -2,6 +2,9 @@
 
 mkdir ~/bin ~/tmp
 
+sudo apt-get install lib32stdc++6
+sudo apt-get install python-dev
+
 sudo apt-get install -y curl
 sudo apt-get install -y git zsh 
 sudo chsh
