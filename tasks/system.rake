@@ -29,8 +29,8 @@ namespace :system do
         fuse-utils smbclient sshfs nfs-common encfs gvfs ecryptfs-utils
     }
     install_pkg(tools)
-    install_pkg([cifs-utils])
-    install_pkg([cifs-utils:i386])
+    install_pkg(["cifs-utils"])
+    install_pkg(["cifs-utils:i386"])
   end
 end
 
