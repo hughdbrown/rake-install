@@ -58,6 +58,15 @@ namespace :media do
     install_deb(url, deb) unless File.exists?("/usr/bin/acroread")
   end
 
+  # Requires explicitly enabling libflashplayer and disabling libpepflashplayer.
+  # http://helpx.adobe.com/flash-player/kb/flash-player-google-chrome.html
+  # Only affects Chrome.
+  # Type "about:plugins" in Chrome navigation bar.
+  task :adobe do
+    pkgs = %w{adobe-flashplugin flashplugin-installer}
+    install_pkg(pkgs)
+  end
+
   task :kazam do
     pkgs = %w{kazam}
     install_pkg(pkgs)
@@ -73,6 +82,7 @@ task :media => [
     "media:hosts",
     "media:pidgin",
     "media:adobe_reader",
-    "media:kazam"
+    "media:kazam",
+    "media:adobe",
 ]
 
