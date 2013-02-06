@@ -4,6 +4,7 @@
 
 TARCMD = {
     "tar.gz" => "xvfz",
+    "tgz" => "xvfz",
     "tar.bz2" => "xvfj"
 }
 
@@ -27,7 +28,7 @@ def install_gems(gems)
   sh("sudo gem install #{all_gems}")
   notice("Installed #{all_gems}")
 end
-
+ 
 def upgrade_gems(gems)
   all_gems = "#{gems.sort.join(' ')}"
   sh("sudo gem install -u #{all_gems}")
@@ -38,7 +39,7 @@ def _download_tar(url, tarfile, tarcmd="xvfz")
   notice("Downloading tarfile #{tarfile}")
   sh("wget #{url} -O #{tarfile}") unless File.exists?(tarfile)
   
-  notice("Untarring tarfile #{tarfile}")
+  notice("Untarring tarfile #{tarcmd} #{tarfile}")
   sh("tar #{tarcmd} #{tarfile}") if File.exists?(tarfile)
 end
 
