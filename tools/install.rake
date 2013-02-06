@@ -2,6 +2,14 @@
 # Installation methods
 #-----------------------------------------------------
 
+require 'open3'
+
+def capture_stderr(cmd)
+  stdin, stdout, stderr = Open3.popen3(cmd)
+  return stderr.readlines
+end
+
+
 TARCMD = {
     "tar.gz" => "xvfz",
     "tgz" => "xvfz",
