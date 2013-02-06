@@ -1,5 +1,8 @@
+require 'open3'
+
 namespace :python do
   PYTHON_VERSION_STR = "3.3.0"
+  PYTHON_BIN = "python3.3"
 
   task :pip do
     pkgs = %w{python-pip}
@@ -10,9 +13,15 @@ namespace :python do
   #desc "Install python binary"
   task :cpython do
     test_fn = Proc.new {
-      # Doesn't work -- python writes strign to strerr
-      expect = "Python #{PYTHON_VERSION_STR}"
-      (not command_exists("python3.3")) || (`python3.3 --version`.strip != expect)
+      # python writes string to strerr
+      expected = "Python #{PYTHON_VERSION_STR}"
+      if command_exists(PYTHON_BIN)
+        cmd = "#{PYTHON_BIN} --version"
+        stdin, stdout, stderr = Open3.popen3(cmd)
+        stderr.readlines[0].strip != expected
+      else
+        true
+      end
     }
 
     version = "Python-#{PYTHON_VERSION_STR}"
