@@ -16,7 +16,7 @@ end
 def command_exists(cmd)
   return ENV["PATH"]
     .split(":")
-    .map {|p| File.join(p, cmd)}
-    .keep_if {|fp| File.exists?(fp)}
+    .map {|path| File.join(path, cmd)}
+    .keep_if {|fullpath| File.exists?(fullpath)}
     .first
 end
