@@ -1,4 +1,5 @@
 namespace :python do
+  PYTHON_VERSION_STR = "3.3.0"
 
   task :pip do
     pkgs = %w{python-pip}
@@ -8,9 +9,15 @@ namespace :python do
 
   #desc "Install python binary"
   task :cpython do
-    version = "Python-3.3.0"
-    url = "http://python.org/ftp/python/3.3.0/#{version}.tgz"
-    install_tar(url, version, {:ext => "tgz"})
+    test_fn = Proc.new {
+      # Doesn't work -- python writes strign to strerr
+      expect = "Python #{PYTHON_VERSION_STR}"
+      (not command_exists("python3.3")) || (`python3.3 --version`.strip != expect)
+    }
+
+    version = "Python-#{PYTHON_VERSION_STR}"
+    url = "http://python.org/ftp/python/#{PYTHON_VERSION_STR}/#{version}.tgz"
+    install_tar(url, version, {:ext => "tgz", :test => test_fn})
   end
 
   #desc "Install pypy binary"

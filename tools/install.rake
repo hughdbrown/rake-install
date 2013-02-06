@@ -43,44 +43,54 @@ def _download_tar(url, tarfile, tarcmd="xvfz")
 end
 
 def download_tar(url, version, target, options={})
-  ext = options[:ext] || "tar.gz"
-  dir = options[:dir] || TMP_DIR
-  block = options[:block]
+  # test is a proc to call to test whether to perform the download
+  test = options[:test]
   
-  tarfile = "#{version}.#{ext}"
-  tarcmd = TARCMD[ext]
-  pwd = FileUtils.pwd()
+  if (not test) or test.call
+    ext = options[:ext] || "tar.gz"
+    dir = options[:dir] || TMP_DIR
+    block = options[:block]
 
-  FileUtils.cd(dir) do
-    begin
-      _download_tar(url, tarfile, tarcmd)
-      block.call if block
-    ensure
-      FileUtils.mv(target, pwd, :verbose => true) if File.exists?(target)
-      FileUtils.rm(tarfile, :verbose => true) if File.exists?(tarfile)
+    tarfile = "#{version}.#{ext}"
+    tarcmd = TARCMD[ext]
+    pwd = FileUtils.pwd()
+  
+    FileUtils.cd(dir) do
+      begin
+        _download_tar(url, tarfile, tarcmd)
+        block.call if block
+      ensure
+        FileUtils.mv(target, pwd, :verbose => true) if File.exists?(target)
+        FileUtils.rm(tarfile, :verbose => true) if File.exists?(tarfile)
+      end
     end
   end
 end
 
 def install_tar(url, version, options={})
-  ext = options[:ext] || "tar.gz"
-  dir = options[:dir] || TMP_DIR
-  block = options[:block]
-
-  tarfile = "#{version}.#{ext}"
-  tarcmd = TARCMD[ext]
-  notice("Installing tarfile #{tarfile}")
-  FileUtils.cd(dir) do
-    begin
-      _download_tar(url, tarfile, tarcmd)
-
-      FileUtils.cd(version) do
-        sh("./configure") if File.exists?("configure")
-        sh("make && sudo make install") unless Dir.glob("[Mm]akefile").empty?
-        block.call if block
+  # test is a proc to call to test whether to perform the download
+  test = options[:test]
+  
+  if (not test) or test.call
+    ext = options[:ext] || "tar.gz"
+    dir = options[:dir] || TMP_DIR
+    block = options[:block]
+    
+    tarfile = "#{version}.#{ext}"
+    tarcmd = TARCMD[ext]
+    notice("Installing tarfile #{tarfile}")
+    FileUtils.cd(dir) do
+      begin
+        _download_tar(url, tarfile, tarcmd)
+    
+        FileUtils.cd(version) do
+          sh("./configure") if File.exists?("configure")
+          sh("make && sudo make install") unless Dir.glob("[Mm]akefile").empty?
+          block.call if block
+        end
+      ensure
+        FileUtils.rm(tarfile, :verbose => true)
       end
-    ensure
-      FileUtils.rm(tarfile, :verbose => true)
     end
   end
 end
@@ -99,4 +109,8 @@ end
 def pip_install_pkg(pkg)
   notice("pip-installing #{pkg.join(' ')}")
   sh("sudo pip install #{pkg.join(' ')}")
+end
+
+def command_exists(cmd)
+  return system("which #{cmd}")
 end
