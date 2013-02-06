@@ -15,7 +15,7 @@ namespace :git do
 
   #desc "Install git binary"
   task :bin do
-    version = "git-1.8.0.2"
+    version = "git-1.8.1.2"
     url = "https://git-core.googlecode.com/files/#{version}.tar.gz"
     install_tar(url, version)
   end
