@@ -17,5 +17,5 @@ sudo apt-get install -y libyaml-dev
 sudo apt-get install -y ruby
 sudo gem install rake
 curl -L https://get.rvm.io | bash -s stable --ruby
-rvm install ruby-1.9.3-p374 --verify-downloads 1
+rvm install ruby-1.9.3-p385 --verify-downloads 1
 
