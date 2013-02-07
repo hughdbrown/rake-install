@@ -71,6 +71,11 @@ namespace :media do
     pkgs = %w{kazam}
     install_pkg(pkgs)
   end
+
+  task :screenkey do
+    pkgs = %w{screenkey}
+    install_pkg(pkgs)
+  end
 end
 
 #desc "Install all media"
@@ -84,5 +89,6 @@ task :media => [
     "media:adobe_reader",
     "media:kazam",
     "media:adobe",
+    "media:screenkey"
 ]
 

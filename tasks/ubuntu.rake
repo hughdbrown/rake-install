@@ -11,7 +11,7 @@ namespace :ubuntu do
     cinnamon_packages = %w{cinnamon cinnamon-session cinnamon-settings libmuffin0 gir1.2-muffin-3.0}
     install_pkg(cinnamon_packages)
 
-    Rake::Task["ubuntu:remove_appmenu"].invoke()
+    #Rake::Task["ubuntu:remove_appmenu"].invoke()
   end
 
   #desc "Install mate library"
