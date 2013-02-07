@@ -25,7 +25,8 @@ namespace :python do
   #desc "Install pypy binary"
   task :pypy do
     pypy_version = "pypy-1.9"
-    bzfile = "#{pypy_version}-linux.tar.bz2"
+    #bzfile = "#{pypy_version}-linux.tar.bz2"
+    bzfile = "#{pypy_version}-linux64.tar.bz2"
 
     FileUtils.cd(TMP_DIR) do
       begin
@@ -57,6 +58,6 @@ namespace :python do
 end
 
 task :python => [
-    #"python:cpython",
+    "python:cpython",
     "python:pypy"
 ]
