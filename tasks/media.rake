@@ -63,7 +63,10 @@ namespace :media do
   # Only affects Chrome.
   # Type "about:plugins" in Chrome navigation bar.
   task :adobe do
-    pkgs = %w{adobe-flashplugin flashplugin-installer}
+    #pkgs = %w{adobe-flashplugin flashplugin-installer}
+    pkgs = %w{adobe-flashplugin}
+    install_pkg(pkgs)
+    pkgs = %w{flashplugin-installer}
     install_pkg(pkgs)
   end
 
