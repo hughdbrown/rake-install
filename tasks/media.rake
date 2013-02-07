@@ -53,6 +53,8 @@ namespace :media do
   end
 
   task :adobe_reader do
+    install_pkg(["libgtk2.0-0"])
+
     deb = "AdbeRdr9.5.1-1_i386linux_enu.deb"
     url = "ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.1/enu/#{deb}"
     install_deb(url, deb) unless File.exists?("/usr/bin/acroread")

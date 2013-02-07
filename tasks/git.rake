@@ -21,7 +21,7 @@ namespace :git do
       expect = /git version #{GIT_VERSION_STR}/
       (not command_exists("git")) || (not `git --version`.strip.scan(expect))
     }
-  
+
     version = "git-#{GIT_VERSION_STR}"
     url = "https://git-core.googlecode.com/files/#{version}.tar.gz"
     install_tar(url, version, {:test => test_fn})
