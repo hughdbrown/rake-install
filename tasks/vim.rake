@@ -10,7 +10,7 @@ namespace :vim do
         FileUtils.cd(File.join(HOME, ".vim/bundle/vim-colorschemes/colors")) do
           sh("wget #{colorscheme}")
         end
-        sh("echo colorscheme #{cs} >> ~/.vimrc")
+        sh("echo colorscheme #{cs} >> ~/.vimrc.local")
       end
     end
   end
