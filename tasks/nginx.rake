@@ -80,41 +80,61 @@ namespace :nginx do
   #desc "install nginx source"
   task :nginx_src do
     FileUtils.cd(TMP_DIR) do
-      sh("wget http://nginx.org/download/#{NGINX_VER}.tar.gz && tar xvfz #{NGINX_VER}.tar.gz && cd #{NGINX_VER}")
+      sh("wget -O #{NGINX_VER}.tar.gz http://nginx.org/download/#{NGINX_VER}.tar.gz && tar xvfz #{NGINX_VER}.tar.gz && cd #{NGINX_VER}")
 
       # Fetch and apply the Nginx SPDY patch
-      sh("wget http://nginx.org/patches/spdy/patch.spdy.txt")
-      sh("patch -p0 < patch.spdy.txt")
+      #sh("wget http://nginx.org/patches/spdy/patch.spdy.txt")
+      #sh("patch -p0 < patch.spdy.txt")
 
       notice("Installed nginx source")
     end
   end
 
   #desc "Install nginx binary"
-  task :nginx => [:prereq, :mod_wsgi, :mod_pagespeed, :nginx_src] do
+  #:mod_wsgi, :mod_pagespeed,
+  # --add-module=../mod_wsgi
+  # --add-module=../mod_pagespeed
+  task :nginx => [:prereq, :nginx_src] do
+    
     FileUtils.cd(TMP_DIR) do
-      options = %w{
-        --prefix=/usr/local/#{NGINX_VER}
-        --conf-path=/etc/nginx/#{NGINX_VER}/nginx.conf
-        --with-cc-opt="-w -Werror=unused-but-set-variable"
-        --add-module=../mod_wsgi
-        --add-module=../mod_pagespeed
-        --without-mail_pop3_module
-        --without-mail_imap_module
-        --without-mail_smtp_module
-        --without-http_rewrite_module
-        --with-http_stub_status_module
-        --with-http_ssl_module
-        --with-http_mp4_module
-        --with-pcre
-        --with-debug
-        --with-http_gzip_static_module
-        --with-http_realip_module
-      }
-      begin
-        configure_make(options)
-      ensure
-        # ...
+      FileUtils.cd(NGINX_VER) do
+        options = %w{
+          --prefix=/usr
+          --conf-path=/etc/nginx/nginx.conf
+          --error-log-path=/var/log/nginx/error.log
+          --with-cc-opt="-w -Werror=unused-but-set-variable"
+          --http-client-body-temp-path=/var/lib/nginx/body
+          --http-fastcgi-temp-path=/var/lib/nginx/fastcgi
+          --http-log-path=/var/log/nginx/access.log
+          --http-proxy-temp-path=/var/lib/nginx/proxy
+          --http-scgi-temp-path=/var/lib/nginx/scgi
+          --http-uwsgi-temp-path=/var/lib/nginx/uwsgi
+          --lock-path=/var/lock/nginx.lock
+          --pid-path=/var/run/nginx.pid
+          --with-debug
+          --with-http_addition_module
+          --with-http_gzip_static_module
+          --with-http_realip_module
+          --with-http_stub_status_module
+          --with-http_ssl_module
+          --with-http_sub_module
+          --with-http_xslt_module
+          --with-ipv6
+          --with-pcre
+          --with-pcre-jit
+          --with-sha1=/usr/include/openssl
+          --with-md5=/usr/include/openssl
+          --without-mail_pop3_module
+          --without-mail_imap_module
+          --without-mail_smtp_module
+          --without-http_rewrite_module
+        }
+        begin
+          configure_make(options)
+        ensure
+          # ...
+        end
+        notice("Installed nginx binary")
       end
     end
   end
