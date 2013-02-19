@@ -1,5 +1,5 @@
 namespace :nginx do
-  NGINX_VER = "nginx-1.3.11"
+  NGINX_VER = "nginx-1.3.13"
 
   #desc "Make nginx prerequisites"
   task :prereq do
@@ -93,26 +93,26 @@ namespace :nginx do
   #desc "Install nginx binary"
   task :nginx => [:prereq, :mod_wsgi, :mod_pagespeed, :nginx_src] do
     FileUtils.cd(TMP_DIR) do
+      options = %w{
+        --prefix=/usr/local/#{NGINX_VER}
+        --conf-path=/etc/nginx/#{NGINX_VER}/nginx.conf
+        --with-cc-opt="-w -Werror=unused-but-set-variable"
+        --add-module=../mod_wsgi
+        --add-module=../mod_pagespeed
+        --without-mail_pop3_module
+        --without-mail_imap_module
+        --without-mail_smtp_module
+        --without-http_rewrite_module
+        --with-http_stub_status_module
+        --with-http_ssl_module
+        --with-http_mp4_module
+        --with-pcre
+        --with-debug
+        --with-http_gzip_static_module
+        --with-http_realip_module
+      }
       begin
-        sh(%Q(
-          ./configure --prefix=/usr/local/#{NGINX_VER}
-                      --conf-path=/etc/nginx/#{NGINX_VER}/nginx.conf
-                      --with-cc-opt="-w -Werror=unused-but-set-variable"
-                      --add-module=../mod_wsgi
-                      --add-module=../mod_pagespeed
-                      --without-mail_pop3_module
-                      --without-mail_imap_module
-                      --without-mail_smtp_module
-                      --without-http_rewrite_module
-                      --with-http_stub_status_module
-                      --with-http_ssl_module
-                      --with-http_mp4_module
-                      --with-pcre
-                      --with-debug
-                      --with-http_gzip_static_module
-                      --with-http_realip_module
-                  && make build && sudo make install
-        ))
+        configure_make(options)
       ensure
         # ...
       end

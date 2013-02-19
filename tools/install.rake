@@ -85,8 +85,7 @@ def install_tar(url, version, options={})
         _download_tar(url, tarfile, tarcmd)
     
         FileUtils.cd(version) do
-          sh("./configure") if File.exists?("configure")
-          sh("make && sudo make install") unless Dir.glob("[Mm]akefile").empty?
+          configure_make()
           block.call if block
         end
       ensure
