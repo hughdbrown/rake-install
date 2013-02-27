@@ -3,6 +3,8 @@ namespace :virtualbox do
     task :virtualbox => ["dev:essential"] do
         pkgs = %w{ virtualbox-4.2 }
         install_pkg(pkgs)
+        pkgs = %w{ virtualbox-guest-additions }
+        install_pkg(pkgs)
     end
 end
 
