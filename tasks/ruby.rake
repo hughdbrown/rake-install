@@ -12,7 +12,11 @@ namespace :ruby do
       libtool bison subversion pkg-config
     }
     install_pkg(pkgs)
-    rubies = %w{ruby-1.9.2-p320 ruby-1.9.3-p392 ruby-2.0.0-p0}
+    rubies = %w{
+        ruby-1.9.2-p320
+        ruby-1.9.3-p392
+        ruby-2.0.0-p0
+    }
     rubies.each{|ruby| sh("rvm install --verify-downloads 1 #{ruby}")}
   end
 end
