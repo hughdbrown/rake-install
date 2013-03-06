@@ -1,9 +1,9 @@
 namespace :nginx do
-  NGINX_VER = "nginx-1.3.13"
+  NGINX_VER = "nginx-1.3.14"
 
   #desc "Make nginx prerequisites"
   task :prereq do
-    tools = %w{zlib1g zlib1g-dev libpcre3 libpcre3-dev openssl}
+    tools = %w{zlib1g zlib1g-dev libpcre3 libpcre3-dev openssl libxml2-dev libxslt-dev}
     install_pkg(tools)
     notice("Installed nginx prerequisites")
   end
