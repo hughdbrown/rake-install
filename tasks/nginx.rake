@@ -1,5 +1,5 @@
 namespace :nginx do
-  NGINX_VER = "nginx-1.3.13"
+  NGINX_VER = "nginx-1.3.14"
 
   #desc "Make nginx prerequisites"
   task :prereq do
