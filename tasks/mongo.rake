@@ -1,5 +1,5 @@
 namespace :mongo do
-  MONGO_VERSION_STR = "2.2.1"
+  MONGO_VERSION_STR = "2.4.0"
 
   #desc "Install mongo and tools"
   task :mongo do
@@ -8,14 +8,12 @@ namespace :mongo do
   end
 
   #desc "Latest mongo"
-  task :mongo_latest do # => [:mongo] do
-    version = "mongodb-linux-i686-#{MONGO_VERSION_STR}"
-    #version = "mongodb-linux-x86_64-2.2.3"
+  task :bin do # => [:mongo] do
+    version = "mongodb-linux-x86_64-#{MONGO_VERSION_STR}"
     url = "http://fastdl.mongodb.org/linux/#{version}.tgz"
-
     test_fn = Proc.new {
       expect = /MongoDB shell version: #{MONGO_VERSION_STR}/
-      (not command_exists("mongo")) || (not `mongo --version`.strip.scan(expect))
+      (not command_exists("mongo")) || (`mongo --version`.strip.scan(expect).length == 0)
     }
 
     b = Proc.new {
@@ -29,4 +27,4 @@ namespace :mongo do
   end
 end
 
-task :mongo => ["mongo:mongo_latest"]
+task :mongo => ["mongo:bin"]
