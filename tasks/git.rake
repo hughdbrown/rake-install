@@ -1,5 +1,5 @@
 namespace :git do
-  GIT_VERSION_STR = "1.8.1.2"
+  GIT_VERSION_STR = "1.8.1.3"
 
   #desc "Install libgit2 library"
   task :libgit2 => ["dev:essential"] do
@@ -18,8 +18,8 @@ namespace :git do
   #desc "Install git binary"
   task :bin do
     test_fn = Proc.new {
-      expect = /git version #{GIT_VERSION_STR}/
-      (not command_exists("git")) || (not `git --version`.strip.scan(expect))
+      expect = /^git version #{GIT_VERSION_STR}$/
+      (not command_exists("git")) || (`git --version`.strip.scan(expect).length == 0)
     }
 
     version = "git-#{GIT_VERSION_STR}"
