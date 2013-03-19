@@ -100,6 +100,8 @@ namespace :nginx do
       FileUtils.cd(NGINX_VER) do
         options = %w{
           --prefix=/usr
+          --user=www-data
+          --group=www-data
           --conf-path=/etc/nginx/nginx.conf
           --error-log-path=/var/log/nginx/error.log
           --with-cc-opt="-w -Werror=unused-but-set-variable"
