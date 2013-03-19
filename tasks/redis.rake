@@ -2,15 +2,15 @@ namespace :redis do
   REDIS_VERSION_STR = "2.6.0"
 
   #desc "Install redis library"
-  task :redis do
+  task :bin do
     version = "redis-#{REDIS_VERSION_STR}"
     url = "http://redis.googlecode.com/files/#{version}.tar.gz"
-    
+
     test_fn = Proc.new {
       expect = /Redis server v=#{REDIS_VERSION_STR}.*/
-      (not command_exists("redis-server")) || (not `redis-server --version`.strip.scan(expect))
+      (not command_exists("redis-server")) || (`redis-server --version`.strip.scan(expect).length == 0)
     }
-  
+
     b = Proc.new {
       FileUtils.cd("utils")
       sh("sudo ./install_server.sh")
@@ -20,4 +20,4 @@ namespace :redis do
 end
 
 #desc "Install redis"
-task :redis => ["redis:redis"]
+task :redis => ["redis:bin"]
