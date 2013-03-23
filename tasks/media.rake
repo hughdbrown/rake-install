@@ -35,6 +35,10 @@ namespace :media do
     install_pkg(pkgs)
   end
 
+  task :youtube_dl do
+    sh("sudo wget http://youtube-dl.org/downloads/2013.02.25/youtube-dl -O /usr/local/bin/youtube-dl && sudo chmod a+x /usr/local/bin/youtube-dl")
+  end
+
   task :brasero do
     pkgs = %w{ brasero }
     install_pkg(pkgs)
@@ -94,6 +98,7 @@ task :media => [
     "media:adobe_reader",
     "media:kazam",
     "media:adobe",
-    "media:screenkey"
+    "media:screenkey",
+    "media:youtube_dl"
 ]
 
