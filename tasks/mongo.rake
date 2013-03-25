@@ -1,5 +1,5 @@
 namespace :mongo do
-  MONGO_VERSION_STR = "2.4.0"
+  MONGO_VERSION_STR = "2.4.1"
 
   #desc "Install mongo and tools"
   task :mongo do
