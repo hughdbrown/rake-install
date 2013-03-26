@@ -25,7 +25,6 @@ namespace :rubygems do
     thor
     tmuxinator
     unicorn
-    vagrant
   }.sort
 
   #desc "Install ruby-dev prerequisite"

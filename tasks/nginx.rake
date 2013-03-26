@@ -1,5 +1,5 @@
 namespace :nginx do
-  NGINX_VER = "nginx-1.3.14"
+  NGINX_VER = "nginx-1.3.15"
 
   #desc "Make nginx prerequisites"
   task :prereq do
@@ -117,6 +117,7 @@ namespace :nginx do
           --with-http_addition_module
           --with-http_gzip_static_module
           --with-http_realip_module
+          --with-http_spdy_module
           --with-http_stub_status_module
           --with-http_ssl_module
           --with-http_sub_module
