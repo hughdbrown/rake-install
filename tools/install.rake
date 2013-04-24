@@ -19,7 +19,7 @@ def remove_pkg(apps)
 end
 
 def install_ppa(ppa)
-  sh("sudo add-apt-repository \"#{ppa}\" && sudo apt-get update")
+  sh(%@sudo add-apt-repository "#{ppa}" && sudo apt-get update@)
   notice("Installed ppa #{ppa}")
 end
 
