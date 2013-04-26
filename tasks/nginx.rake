@@ -1,5 +1,6 @@
 namespace :nginx do
   NGINX_VER = "nginx-1.4.0"
+  PAGESPEED_VER = "release-1.5.27.1-beta"
 
   #desc "Make nginx prerequisites"
   task :prereq do
@@ -18,9 +19,14 @@ namespace :nginx do
     end
   end
 
+  # https://github.com/pagespeed/ngx_pagespeed
+  task :nginx_pagespeed do
+    depends = %w{ build-essential zlib1g-dev libpcre3 libpcre3-dev }
     install_pkg(depends)
 
     FileUtils.cd(TMP_DIR) do
+      sh("wget https://github.com/pagespeed/ngx_pagespeed/archive/#{PAGESPEED_VER}.zip && unzip #{PAGESPEED_VER}.zip")
+      notice("Installed nginx pagespeed")
     end
   end
 
@@ -35,11 +41,10 @@ namespace :nginx do
   #desc "Install nginx binary"
   #:mod_wsgi
   # --add-module=../mod_wsgi
-  task :nginx => [:prereq, :nginx_src] do
-    
+  task :nginx => [:prereq, :nginx_src, :nginx_pagespeed] do
     FileUtils.cd(TMP_DIR) do
       FileUtils.cd(NGINX_VER) do
-        options = %w{
+        options = %W{
           --prefix=/usr
           --user=www-data
           --group=www-data
@@ -72,6 +77,7 @@ namespace :nginx do
           --without-mail_imap_module
           --without-mail_smtp_module
           --without-http_rewrite_module
+          --add-module=#{TMP_DIR}/ngx_pagespeed-#{PAGESPEED_VER}
         }
         begin
           configure_make(options)
