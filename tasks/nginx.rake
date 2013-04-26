@@ -18,62 +18,9 @@ namespace :nginx do
     end
   end
 
-  #desc "Make pagespeed"
-  task :pagespeed do
-    # From:
-    #  https://developers.google.com/speed/docs/mod_pagespeed/build_from_source
-
-    depends = %w{apache2 g++ python subversion gperf make devscripts fakeroot}
     install_pkg(depends)
 
     FileUtils.cd(TMP_DIR) do
-      sh("svn co http://src.chromium.org/svn/trunk/tools/depot_tools")
-
-      FileUtils.mkdir("mod_pagespeed") unless File.exists?("mod_pagespeed")
-      FileUtils.cd("mod_pagespeed") do
-        gclient = "../depot_tools/gclient"
-        sh("#{gclient} config http://modpagespeed.googlecode.com/svn/branches/latest-beta/src")
-        sh("#{gclient} sync --force --jobs=1")
-      end
-    end
-    notice("Built pagespeed")
-  end
-
-  #desc "Test pagespeed"
-  task :pagespeed_test => [:pagespeed] do
-    FileUtils.cd(File.join(TMP_DIR, "mod_pagespeed", "src")) do
-      sh("make BUILDTYPE=Release mod_pagespeed_test pagespeed_automatic_test")
-      sh("./out/Release/mod_pagespeed_test")
-      sh("./out/Release/pagespeed_automatic_test")
-    end
-    notice("Tested pagespeed")
-  end
-
-  #desc "Compile pagespeed"
-  task :pagespeed_compile => [:pagespeed] do
-    FileUtils.cd(File.join(TMP_DIR, "mod_pagespeed", "src")) do
-      sh("make BUILDTYPE=Release")
-      FileUtils.cd("#{TMP_DIR}/mod_pagespeed/src/net/instaweb/automatic") do
-        sh("make all")
-      end
-    end
-    notice("Compiled pagespeed")
-  end
-
-  #desc "Install pagespeed"
-  task :pagespeed_install => [:pagespeed_compile] do
-    FileUtils.cd(File.join(TMP_DIR, "mod_pagespeed", "src")) do
-      sh("./ubuntu.sh staging")
-      sh("sudo ./ubuntu.sh install")
-      #sh("sudo ./ubuntu.sh stop start")
-    end
-  end
-
-  #desc "Make mod_pagespeed"
-  task :mod_pagespeed => [:pagespeed, :pagespeed_test, :pagespeed_compile, :pagespeed_install, "git:bin"] do
-    FileUtils.cd(TMP_DIR) do
-      sh("git clone git://github.com/pagespeed/ngx_pagespeed.git")
-      notice("Built mod_pagespeed")
     end
   end
 
@@ -81,19 +28,13 @@ namespace :nginx do
   task :nginx_src do
     FileUtils.cd(TMP_DIR) do
       sh("wget -O #{NGINX_VER}.tar.gz http://nginx.org/download/#{NGINX_VER}.tar.gz && tar xvfz #{NGINX_VER}.tar.gz && cd #{NGINX_VER}")
-
-      # Fetch and apply the Nginx SPDY patch
-      #sh("wget http://nginx.org/patches/spdy/patch.spdy.txt")
-      #sh("patch -p0 < patch.spdy.txt")
-
       notice("Installed nginx source")
     end
   end
 
   #desc "Install nginx binary"
-  #:mod_wsgi, :mod_pagespeed,
+  #:mod_wsgi
   # --add-module=../mod_wsgi
-  # --add-module=../mod_pagespeed
   task :nginx => [:prereq, :nginx_src] do
     
     FileUtils.cd(TMP_DIR) do
