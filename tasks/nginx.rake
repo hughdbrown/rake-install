@@ -1,6 +1,10 @@
 namespace :nginx do
-  NGINX_VER = "nginx-1.4.0"
-  PAGESPEED_VER = "release-1.5.27.1-beta"
+  NGINX_VER = "nginx-1.5.0"
+  PSOL_VER = "1.5.27.2"
+  PSOL_TAR = "#{PSOL_VER}.tar.gz"
+  PAGESPEED_VER = "release-#{PSOL_VER}-beta"
+  PAGESPEED_ZIP = "#{PAGESPEED_VER}.zip"
+  PAGESPEED_DIR = "ngx_pagespeed-#{PAGESPEED_VER}"
 
   #desc "Make nginx prerequisites"
   task :prereq do
@@ -25,8 +29,18 @@ namespace :nginx do
     install_pkg(depends)
 
     FileUtils.cd(TMP_DIR) do
-      sh("wget https://github.com/pagespeed/ngx_pagespeed/archive/#{PAGESPEED_VER}.zip && unzip #{PAGESPEED_VER}.zip")
+      wget_cmd = "wget -O #{PAGESPEED_ZIP} https://github.com/pagespeed/ngx_pagespeed/archive/#{PAGESPEED_ZIP}"
+      expand_cmd = "unzip #{PAGESPEED_ZIP}"
+      sh(wget_cmd)
+      sh(expand_cmd)
       notice("Installed nginx pagespeed")
+      FileUtils.cd(PAGESPEED_DIR) do
+        wget_cmd = "wget -O #{PSOL_TAR} https://dl.google.com/dl/page-speed/psol/#{PSOL_TAR}"
+        expand_cmd = "tar -xzvf #{PSOL_TAR}"
+        sh(wget_cmd)
+        sh(expand_cmd)
+        notice("Installed nginx psol")
+      end
     end
   end
 
