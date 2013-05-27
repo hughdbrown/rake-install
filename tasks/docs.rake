@@ -3,9 +3,9 @@ namespace :docs do
 
   task :pandoc do
     pkgs = %w{ haskell-platform }
-    install_pkgs(pkgs)
+    install_pkg(pkgs)
     pkgs = %w{ pandoc }
-    install_pkgs(pkgs)
+    install_pkg(pkgs)
   end
 
   task :latex do
