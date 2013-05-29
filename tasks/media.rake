@@ -59,9 +59,14 @@ namespace :media do
   task :adobe_reader do
     install_pkg(["libgtk2.0-0"])
 
-    deb = "AdbeRdr9.5.1-1_i386linux_enu.deb"
-    url = "ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.1/enu/#{deb}"
-    install_deb(url, deb) unless File.exists?("/usr/bin/acroread")
+    bin = "AdbeRdr9.5.5-1_i486linux_enu.bin"
+    url = "http://ardownload.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/#{bin}"
+    FileUtils.cd(TMP_DIR) do
+      sh("wget #{url}")
+      sh("chmod +x #{bin}")
+      sh("sudo ./#{bin}")
+    end
+    #install_deb(url, deb) unless File.exists?("/usr/bin/acroread")
   end
 
   # Requires explicitly enabling libflashplayer and disabling libpepflashplayer.
@@ -101,4 +106,3 @@ task :media => [
     "media:screenkey",
     "media:youtube_dl"
 ]
-
