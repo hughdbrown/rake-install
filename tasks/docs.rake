@@ -23,4 +23,3 @@ task :docs => [
     "docs:latex",
     "docs:pandoc",
 ]
-
