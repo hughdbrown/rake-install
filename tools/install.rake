@@ -10,7 +10,7 @@ TARCMD = {
 
 def install_pkg(apps)
   notice("Installing #{apps.join(' ')}")
-  sh("sudo apt-get -y install #{apps.join(' ')}")
+  sh("sudo apt-get -y --force-yes install #{apps.join(' ')}")
 end
 
 def remove_pkg(apps)
