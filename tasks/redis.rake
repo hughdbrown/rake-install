@@ -1,5 +1,5 @@
 namespace :redis do
-  REDIS_VERSION_STR = "2.6.11"
+  REDIS_VERSION_STR = "2.6.14"
 
   #desc "Install redis library"
   task :bin do
