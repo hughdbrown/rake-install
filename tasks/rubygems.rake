@@ -1,5 +1,4 @@
 namespace :rubygems do
-  # pry
   gems = %w{
     awesome_print
     aws-s3
@@ -12,6 +11,7 @@ namespace :rubygems do
     markdown
     net-scp
     net-ssh
+    pry
     rack
     rake
     redis

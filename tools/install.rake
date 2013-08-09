@@ -25,7 +25,7 @@ end
 
 def install_gems(gems)
   all_gems = "#{gems.sort.join(' ')}"
-  sh("sudo gem install #{all_gems}")
+  sh("sudo gem install --no-rdoc --no-ri #{all_gems}")
   notice("Installed #{all_gems}")
 end
  
