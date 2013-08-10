@@ -24,7 +24,7 @@ namespace :python do
 
   #desc "Install pypy binary"
   task :pypy do
-    pypy_version = "pypy-2.0"
+    pypy_version = "pypy-2.1"
     #bzfile = "#{pypy_version}-linux.tar.bz2"
     bzfile = "#{pypy_version}-linux64.tar.bz2"
 
