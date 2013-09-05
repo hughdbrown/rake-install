@@ -3,8 +3,6 @@
 #
 # Medibuntu
 #./install-medibuntu.sh
-#
-#./install-skype.sh
 
 namespace :media do
   IRSSI_HOME = File.join(HOME, ".irssi")
@@ -90,6 +88,14 @@ namespace :media do
     pkgs = %w{screenkey}
     install_pkg(pkgs)
   end
+
+  task :skype do
+    dependencies = %w{libasound2 libqt4-dbus libqt4-network libqt4-xml libqtcore4 libqtgui4 libqtwebkit4 libstdc++6 libx11-6 libxext6 libxss1 libxv1 libssl1.0.0}
+    install_pkg(dependencies)
+
+    deb = "skype-ubuntu-precise_4.2.0.11-1_i386.deb"
+    install_deb("http://download.skype.com/linux/#{deb}", deb)
+  end
 end
 
 #desc "Install all media"
@@ -104,5 +110,6 @@ task :media => [
     "media:kazam",
     "media:adobe",
     "media:screenkey",
-    "media:youtube_dl"
+    "media:youtube_dl",
+    "media:skype"
 ]
