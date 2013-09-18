@@ -34,7 +34,9 @@ namespace :media do
   end
 
   task :youtube_dl do
-    sh("sudo wget http://youtube-dl.org/downloads/2013.02.25/youtube-dl -O /usr/local/bin/youtube-dl && sudo chmod a+x /usr/local/bin/youtube-dl")
+    app = "/usr/local/bin/youtube-dl"
+    version = "2013.09.17"
+    sh("sudo wget http://youtube-dl.org/downloads/#{version}/youtube-dl -O #{app} && sudo chmod a+x #{app}")
   end
 
   task :brasero do
