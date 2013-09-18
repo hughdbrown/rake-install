@@ -40,7 +40,7 @@ namespace :media do
   end
 
   task :brasero do
-    pkgs = %w{ brasero }
+    pkgs = %w{ brasero libdvdcss2 }
     install_pkg(pkgs)
   end
 
