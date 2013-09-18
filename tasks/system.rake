@@ -1,16 +1,10 @@
 namespace :system do
 
-  #desc "Install libnotify"
+  desc "Install libnotify"
   task :libnotify do
     tools = %w{libnotify-bin}
     install_pkg(tools)
   end
-
-  #desc "Install compiz"
-  #task :compiz do
-  #  tools = %w{compizconfig-settings-manager}
-  #  install_pkg(tools)
-  #end
 
   task :curl do
     tools = %w{libcurl3 libcurl3-gnutls libcurl4-openssl-dev curl}
@@ -23,10 +17,10 @@ namespace :system do
     install_pkg(tools)
   end
 
-  #desc "Install file systems"
+  desc "Install file systems"
   task :file_systems => [:file_system_lib] do
     tools = %w{
-        fuse-utils smbclient sshfs nfs-common encfs gvfs ecryptfs-utils
+      fuse-utils smbclient sshfs nfs-common encfs gvfs ecryptfs-utils
     }
     install_pkg(tools)
     install_pkg(["cifs-utils"])

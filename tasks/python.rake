@@ -2,15 +2,16 @@ namespace :python do
   PYTHON_VERSION_STR = "3.3.2"
   PYTHON_BIN = "python3.3"
   VERSION_CMD = "#{PYTHON_BIN} --version"
-  EXPECTED_VERSION_STR = "Python #{PYTHON_VERSION_STR}"
+  EXPECTED_VERSION_STR = "Python #{PYTHON_VERSION_STR}" 
 
+  desc "Install pip"
   task :pip do
     pkgs = %w{python-pip}
     install_pkg(pkgs)
     sh("sudo pip install virtualenv virtualenvwrapper")
   end
 
-  #desc "Install python binary"
+  desc "Install python binary"
   task :cpython do
     test_fn = Proc.new {
       # python writes string to strerr
@@ -22,7 +23,7 @@ namespace :python do
     install_tar(url, version, {:ext => "tgz", :test => test_fn})
   end
 
-  #desc "Install pypy binary"
+  desc "Install pypy binary"
   task :pypy do
     pypy_version = "pypy-2.1"
     #bzfile = "#{pypy_version}-linux.tar.bz2"

@@ -1,5 +1,5 @@
 namespace :mercurial do
-  #desc "Install mercurial binary"
+  desc "Install mercurial binary"
   task :bin do
     tools = %w{mercurial}
     install_pkg(tools)

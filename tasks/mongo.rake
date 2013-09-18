@@ -1,13 +1,13 @@
 namespace :mongo do
-  MONGO_VERSION_STR = "2.4.1"
+  MONGO_VERSION_STR = "2.5.2"
 
-  #desc "Install mongo and tools"
+  desc "Install mongo and tools"
   task :mongo do
     tools = %w{mongodb mongodb-server mongodb-dev mongodb-clients }
     install_pkg(tools)
   end
 
-  #desc "Latest mongo"
+  desc "Install mongo binaries"
   task :bin do # => [:mongo] do
     version = "mongodb-linux-x86_64-#{MONGO_VERSION_STR}"
     url = "http://fastdl.mongodb.org/linux/#{version}.tgz"

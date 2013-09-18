@@ -12,17 +12,12 @@ namespace :virtualenv do
     sh("curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | sudo python")
   end
 
-  #task :hub do
-  #  notice("Installing hub")
-  #  url = "http://hub.github.com/standalone"
-  #  sh("curl #{url} -sLo #{HUB}")
-  #  sh("chmod +x #{HUB}")
-  #end
+  desc "Install hub (a github fronend for git)"
   task :hub do
     install_gems(["hub"])
   end
 
-  #desc "Install basic tools"
+  desc "Install virtualenv tools"
   task :virtualenv => ["virtualenv:pip", "virtualenv:hub"] do
     notice("Installing virtualenv")
 

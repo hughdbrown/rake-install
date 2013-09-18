@@ -7,7 +7,7 @@ namespace :rabbitmq do
   # This also requires amqplib
   # pip install amqplib
   # Not sure whether to install globally or waht
-  #desc "Install rabbitmq library"
+  desc "Install rabbitmq library"
   task :rabbitmq => [:erlang] do
     deb = "rabbitmq-server_2.8.7-1_all.deb"
     url = "http://www.rabbitmq.com/releases/rabbitmq-server/v2.8.7/#{deb}"

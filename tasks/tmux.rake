@@ -1,12 +1,13 @@
 namespace :tmux do
   TMUX_VERSION_STR = "1.8"
 
-  task :libevent => [] do
+  desc "Install libevent"
+  task :libevent do
     pkgs = %w{ libevent-dev }
     install_pkg(pkgs)
   end
 
-  #desc "Latest tmux"
+  desc "Install tmux (terminal multiplexer)"
   task :bin => [:libevent] do
     version = "tmux-#{TMUX_VERSION_STR}"
     url = "http://downloads.sourceforge.net/tmux/#{version}.tar.gz"

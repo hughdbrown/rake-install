@@ -1,4 +1,5 @@
 namespace :zsh do
+  desc "Install zsh (a command shell)"
   task :install do
     pkgs = %w{zsh}
     install_pkg(pkgs)

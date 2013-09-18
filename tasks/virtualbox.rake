@@ -1,5 +1,5 @@
 namespace :virtualbox do
-    #desc "Install virtualbox"
+    desc "Install virtualbox"
     task :virtualbox => ["dev:essential"] do
         pkgs = %w{ virtualbox-4.2 }
         install_pkg(pkgs)
@@ -17,5 +17,5 @@ namespace :virtualbox do
     # sudo umount /mnt/iso
 end
 
-#desc "Install virtualbox"
+desc "Install virtualbox"
 task :virtualbox => ["virtualbox:virtualbox"]

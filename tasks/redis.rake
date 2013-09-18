@@ -1,7 +1,7 @@
 namespace :redis do
   REDIS_VERSION_STR = "2.6.14"
 
-  #desc "Install redis library"
+  desc "Install redis database"
   task :bin do
     version = "redis-#{REDIS_VERSION_STR}"
     url = "http://redis.googlecode.com/files/#{version}.tar.gz"

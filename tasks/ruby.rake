@@ -1,5 +1,5 @@
 namespace :ruby do
-  #desc "Install ruby"
+  desc "Install ruby"
   task :install => ["system:curl"] do
     pkgs = %w{
       build-essential

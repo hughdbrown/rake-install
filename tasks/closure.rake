@@ -8,7 +8,7 @@ namespace :closure do
         end
     end
 
-    #desc "Build plovr from scratch"
+    desc "Build plovr from scratch"
     task :plovr => [ANT_BUILD_FILE] do
         FileUtils.cd(TMP_PLOVR_DIR) do
             begin
@@ -19,7 +19,7 @@ namespace :closure do
         end
     end
 
-    #desc "Build compiler.jar from scratch"
+    desc "Build compiler.jar from scratch"
     task :compiler => [] do
         url = "http://closure-compiler.googlecode.com/files/compiler-latest.tar.gz"
         version = "compiler"

@@ -1,4 +1,5 @@
 namespace :java do
+    desc "Install java"
     task :java do
         pkgs = %w{ openjdk-7-jdk }
         install_pkg(pkgs)

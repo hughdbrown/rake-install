@@ -1,6 +1,7 @@
 namespace :docs do
   LATEX_TAR = "install-tl-unx.tar.gz"
 
+  desc "Install pandocs (package for all text formatting)"
   task :pandoc do
     pkgs = %w{ haskell-platform }
     install_pkg(pkgs)
@@ -8,6 +9,7 @@ namespace :docs do
     install_pkg(pkgs)
   end
 
+  desc "Install latex"
   task :latex do
     FileUtils.cd(TMP_DIR) do
       sh("wget http://mirror.ctan.org/systems/texlive/tlnet/#{LATEX_TAR}")
@@ -19,6 +21,7 @@ namespace :docs do
   end
 end
 
+desc "Install all doc packagesS"
 task :docs => [
     "docs:latex",
     "docs:pandoc",

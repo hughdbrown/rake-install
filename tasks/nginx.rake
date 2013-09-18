@@ -52,7 +52,7 @@ namespace :nginx do
     end
   end
 
-  #desc "Install nginx binary"
+  desc "Install nginx binary (with mod_wsgi and pagespeed)"
   #:mod_wsgi
   # --add-module=../mod_wsgi
   task :nginx => [:prereq, :nginx_src, :nginx_pagespeed] do

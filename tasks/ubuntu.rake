@@ -3,7 +3,7 @@ namespace :ubuntu do
   amazon_packages = %w{unity-lens-shopping}
   mate_packages = %w{mate-archive-keyring mate-core mate-desktop-environment}
 
-  #desc "Install cinnamon library"
+  desc "Install cinnamon library"
   task :cinnamon do
     # ppa = "ppa:merlwiz79/cinnamon-ppa"
     ppa = "ppa:gwendal-lebihan-dev/cinnamon-stable"
@@ -20,17 +20,17 @@ namespace :ubuntu do
     install_pkg(mate_packages)
   end
 
-  #desc "Remove appmenu packages"
+  desc "Remove appmenu packages"
   task :remove_appmenu do
     remove_pkg(appmenu_packages)
   end
 
-  #desc "Remove amazon packages"
+  desc "Remove amazon packages"
   task :remove_amazon do
     remove_pkg(amazon_packages)
   end
 
-  #desc "Install appmenu packages"
+  desc "Install appmenu packages"
   task :install_appmenu do
     install_pkg(appmenu_packages)
   end
