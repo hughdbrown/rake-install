@@ -19,6 +19,7 @@ namespace :rubygems do
     rugged
     rvm
     sass
+    showterm
     sinatra
     slideshow
     thin
