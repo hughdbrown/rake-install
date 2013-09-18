@@ -15,12 +15,14 @@ namespace :media do
     end
   end
 
+  desc "Install handbrake (a client for creating digital video)"
   task :handbrake do
     install_ppa("ppa:stebbins/handbrake-snapshots")
     pkgs = %w{ handbrake-gtk handbrake-cli }
     install_pkg(pkgs)
   end
 
+  desc "Install irssi (a n IRC client)"
   task :irssi => [SPRING_THEME] do
     # irssi IRC terminal-based client
     # http://www.techdrivein.com/2010/07/irssi-really-good-terminal-based-irc.html
@@ -28,22 +30,26 @@ namespace :media do
     install_pkg(pkgs)
   end
 
+  desc "Install abcde (for ripping CDs)"
   task :abcde do
     pkgs = %w{ abcde lame id3v2 }
     install_pkg(pkgs)
   end
 
+  desc "Install youtube_dl (fordownloading from youtube)"
   task :youtube_dl do
     app = "/usr/local/bin/youtube-dl"
     version = "2013.09.17"
     sh("sudo wget http://youtube-dl.org/downloads/#{version}/youtube-dl -O #{app} && sudo chmod a+x #{app}")
   end
 
+  desc "Install brasero (for ripping DVDs)"
   task :brasero do
     pkgs = %w{ brasero libdvdcss2 }
     install_pkg(pkgs)
   end
 
+  desc "Install hosts file"
   task :hosts do
     hosts_file = "/etc/hosts"
     if File.size(hosts_file) < 1024
@@ -51,11 +57,13 @@ namespace :media do
     end
   end
 
+  desc "Install pidgin (an IM client)"
   task :pidgin do
     pkgs = %w{ pidgin }
     install_pkg(pkgs)
   end
 
+  desc "Install Adobe reader"
   task :adobe_reader do
     install_pkg(["libgtk2.0-0"])
 
@@ -73,6 +81,7 @@ namespace :media do
   # http://helpx.adobe.com/flash-player/kb/flash-player-google-chrome.html
   # Only affects Chrome.
   # Type "about:plugins" in Chrome navigation bar.
+  desc "Install Adobe plugins"
   task :adobe do
     #pkgs = %w{adobe-flashplugin flashplugin-installer}
     pkgs = %w{adobe-flashplugin}
@@ -81,16 +90,19 @@ namespace :media do
     install_pkg(pkgs)
   end
 
+  desc "Install screenkey (for recording screen captures)"
   task :kazam do
     pkgs = %w{kazam}
     install_pkg(pkgs)
   end
 
+  desc "Install screenkey (for screen demos)"
   task :screenkey do
     pkgs = %w{screenkey}
     install_pkg(pkgs)
   end
 
+  desc "Install skype"
   task :skype do
     dependencies = %w{libasound2 libqt4-dbus libqt4-network libqt4-xml libqtcore4 libqtgui4 libqtwebkit4 libstdc++6 libx11-6 libxext6 libxss1 libxv1 libssl1.0.0}
     install_pkg(dependencies)
