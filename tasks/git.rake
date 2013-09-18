@@ -1,7 +1,7 @@
 namespace :git do
   GIT_VERSION_STR = "1.8.3"
 
-  #desc "Install libgit2 library"
+  desc "Install libgit2 library"
   task :libgit2 => ["dev:essential"] do
     FileUtils.cd(TMP_DIR) do
       sh("git clone git://github.com/libgit2/libgit2.git") unless Dir.exists?("libgit2")
@@ -15,7 +15,7 @@ namespace :git do
     end
   end
 
-  #desc "Install git binary"
+  desc "Install git binary"
   task :bin do
     test_fn = Proc.new {
       expect = /^git version #{GIT_VERSION_STR}$/
@@ -27,7 +27,7 @@ namespace :git do
     install_tar(url, version, {:test => test_fn})
   end
 
-  #desc "Install git utilities"
+  desc "Install git utilities"
   task :util do
     tools = %w{gitg gitk gitstats tig}
     install_pkg(tools)
