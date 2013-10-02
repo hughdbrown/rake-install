@@ -65,9 +65,10 @@ namespace :media do
 
   desc "Install Adobe reader"
   task :adobe_reader do
-    install_pkg(["libgtk2.0-0"])
+    pkgs = %w{ cups-pdf libgtk2.0-0 }
+    install_pkg(pkgs)
 
-    bin = "AdbeRdr9.5.5-1_i486linux_enu.bin"
+    bin = "AdbeRdr9.5.5-1_i386linux_enu.bin"
     url = "http://ardownload.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/#{bin}"
     FileUtils.cd(TMP_DIR) do
       sh("wget #{url}")
