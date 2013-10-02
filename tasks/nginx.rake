@@ -1,10 +1,11 @@
 namespace :nginx do
-  NGINX_VER = "nginx-1.5.3"
+  NGINX_VER = "nginx-1.5.6"
   PSOL_VER = "1.5.27.3"
   PSOL_TAR = "#{PSOL_VER}.tar.gz"
   PAGESPEED_VER = "release-#{PSOL_VER}-beta"
   PAGESPEED_ZIP = "#{PAGESPEED_VER}.zip"
   PAGESPEED_DIR = "ngx_pagespeed-#{PAGESPEED_VER}"
+  NGINX_INIT = "data/nginx"
 
   #desc "Make nginx prerequisites"
   task :prereq do
@@ -102,6 +103,12 @@ namespace :nginx do
       end
     end
   end
+  
+  sh("sudo cp -v #{NGINX_INIT} /etc/init.d/.")
+  sh("sudo chmod +x /etc/init.d/nginx && sudo update-rc.d nginx defaults")
+  
+  # Add a user for nginx to run as
+  # sudo adduser --system --no-create-home --disabled-login --disabled-password --group nginx
 end
 
 task :nginx => ["nginx:nginx"]
