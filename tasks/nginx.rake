@@ -100,15 +100,21 @@ namespace :nginx do
           # ...
         end
         notice("Installed nginx binary")
+        Rake::Task["nginx:service"].invoke
+        Rake::Task["nginx:adduser"].invoke
       end
     end
   end
-  
-  sh("sudo cp -v #{NGINX_INIT} /etc/init.d/.")
-  sh("sudo chmod +x /etc/init.d/nginx && sudo update-rc.d nginx defaults")
-  
-  # Add a user for nginx to run as
-  # sudo adduser --system --no-create-home --disabled-login --disabled-password --group nginx
+
+  desc "Install nginx service"
+  task :service do
+    add_service("nginx", NGINX_INIT)
+  end
+
+  desc "Add a user for nginx to run as"
+  task :adduser do
+    sh("sudo adduser --system --no-create-home --disabled-login --disabled-password --group nginx")
+  end
 end
 
 task :nginx => ["nginx:nginx"]

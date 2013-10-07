@@ -2,7 +2,8 @@
 # dropbox service
 # Replace with linux users you want to run Dropbox clients for
 
-DROPBOX_USERS="hbrown"
+# DROPBOX_USERS="hbrown"
+DROPBOX_USERS="hughdbrown"
 DAEMON=.dropbox-dist/dropbox
 
 start() {
