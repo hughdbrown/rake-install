@@ -4,7 +4,7 @@ namespace :schwab do
 
     task "Install dependencies"
     task :icadependency do
-        pkgs = %w{ libmotif4:i386 nspluginwrapper libmotif4 flashplugin-installer curl ia32-libs lib32asound2 lib32z1 }
+        pkgs = %w{ libmotif4:i386 libxaw7 nspluginwrapper libmotif4 flashplugin-installer curl ia32-libs lib32asound2 lib32z1 }
         install_pkg(pkgs)
     end
 
@@ -12,11 +12,11 @@ namespace :schwab do
     task :icaclient => [:icadependency] do
         FileUtils.cd(TMP_DIR) do
             sh("wget -O #{ICA_CLIENT_DEBNAME} \"#{ICA_CLIENT_DEB_URL}\"")
-            sh("sudo dpkg -i #{ICA_CLIENT_DEBNAME}")
+            sh("sudo dpkg --force-architecture -i #{ICA_CLIENT_DEBNAME}")
 
             # mchttp://forums.citrix.com/thread.jspa?threadID=306353&tstart=0
-            sh("sudo sed -i 's/grep \"i\[0-9\]86\"/grep -iE \"x86_64\"/g' /var/lib/dpkg/info/icaclient.postinst")
-            sh("sudo dpkg --configure icaclient")
+            #sh("sudo sed -i 's/grep \"i\[0-9\]86\"/grep -iE \"x86_64\"/g' /var/lib/dpkg/info/icaclient.postinst")
+            #sh("sudo dpkg --configure icaclient")
         end
     end
 end
