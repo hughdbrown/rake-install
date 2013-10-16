@@ -1,12 +1,14 @@
 namespace :virtualbox do
     desc "Install virtualbox"
     task :virtualbox => ["dev:essential"] do
-        pkgs = %w{ virtualbox-4.2 }
+        apt_key_install("http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc")
+        apt_sources_install("deb http://download.virtualbox.org/virtualbox/debian raring contrib")
+        pkgs = %w{ virtualbox-4.3 }
         install_pkg(pkgs)
         pkgs = %w{ virtualbox-guest-additions-iso }
         install_pkg(pkgs)
     end
-    
+
     # Alternative installation from iso
     # http://www.cyberciti.biz/faq/ubuntu-mount-iso-image/
     # wget http://download.virtualbox.org/virtualbox/4.2.6/VBoxGuestAdditions_4.2.6.iso

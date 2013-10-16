@@ -111,3 +111,11 @@ def pip_install_pkg(pkg)
   sh("sudo pip install #{pkg.join(' ')}")
 end
 
+def apt_sources_install(value, filename="/etc/apt/sources.list")
+  sh("echo #{value} | sudo tee -a #{filename}")
+end
+
+def apt_key_install(url)
+  sh("wget -O - #{url} | sudo apt-key add -")
+end
+
