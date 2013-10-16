@@ -3,6 +3,7 @@ namespace :virtualbox do
     task :virtualbox => ["dev:essential"] do
         apt_key_install("http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc")
         apt_sources_install("deb http://download.virtualbox.org/virtualbox/debian raring contrib")
+        sh("sudo apt-get update")
         pkgs = %w{ virtualbox-4.3 }
         install_pkg(pkgs)
         pkgs = %w{ virtualbox-guest-additions-iso }
