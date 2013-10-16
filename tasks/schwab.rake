@@ -13,10 +13,6 @@ namespace :schwab do
         FileUtils.cd(TMP_DIR) do
             sh("wget -O #{ICA_CLIENT_DEBNAME} \"#{ICA_CLIENT_DEB_URL}\"")
             sh("sudo dpkg --force-architecture -i #{ICA_CLIENT_DEBNAME}")
-
-            # mchttp://forums.citrix.com/thread.jspa?threadID=306353&tstart=0
-            #sh("sudo sed -i 's/grep \"i\[0-9\]86\"/grep -iE \"x86_64\"/g' /var/lib/dpkg/info/icaclient.postinst")
-            #sh("sudo dpkg --configure icaclient")
         end
     end
 end
