@@ -63,6 +63,12 @@ namespace :media do
     install_pkg(pkgs)
   end
 
+  desc "Fix medibuntu"
+  task :medibuntu do
+    sh("sudo sed -i ''|deb http://packages.medibuntu.org/.*|d' /etc/apt/sources.list")
+    sh("echo deb http://mirrors.ucr.ac.cr/medibuntu/ raring free non-free | sudo tee -a /etc/apt/sources.list")
+  end
+
   desc "Install Adobe reader"
   task :adobe_reader do
     pkgs = %w{ cups-pdf libgtk2.0-0 }
