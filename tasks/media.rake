@@ -65,8 +65,8 @@ namespace :media do
 
   desc "Fix medibuntu"
   task :medibuntu do
-    sh("sudo sed -i '|deb http://packages.medibuntu.org/.*|d' /etc/apt/sources.list")
-    sh("echo deb http://mirrors.ucr.ac.cr/medibuntu/ raring free non-free | sudo tee -a /etc/apt/sources.list")
+    sh("sudo sed -i '/.*medibuntu\.org.*/d' /etc/apt/sources.list")
+    sh("echo 'deb http://mirrors.ucr.ac.cr/medibuntu/ raring free non-free' | sudo tee -a /etc/apt/sources.list")
   end
 
   desc "Install Adobe reader"
