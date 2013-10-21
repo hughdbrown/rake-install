@@ -9,8 +9,8 @@ namespace :dropbox do
             deb = "dropbox_1.6.0_amd64.deb"
             url = "https://www.dropbox.com/download?dl=packages/ubuntu/#{deb}"
             install_deb(url, deb)
-            Rake::Task["dropbox:service"].invoke
         end
+        Rake::Task["dropbox:service"].invoke
     end
 
     desc "Install dropbox service"
