@@ -2,12 +2,13 @@
 
 mkdir -p ~/bin ~/tmp
 
-sudo apt-get install -y lib32stdc++6
+# sudo apt-get install -y lib32stdc++6
 sudo apt-get install -y python-dev
+sudo apt-get install libreadline6-dev zlib1g-dev libssl-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
 
 sudo apt-get install -y curl
 sudo apt-get install -y git zsh 
-sudo chsh
+chsh -s /bin/zsh
 sudo apt-get install -y vim vim-gnome 
 
 sudo apt-get install -y python-pip
