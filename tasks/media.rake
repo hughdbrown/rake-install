@@ -111,7 +111,17 @@ namespace :media do
 
   desc "Install skype"
   task :skype do
-    dependencies = %w{libasound2 libqt4-dbus libqt4-network libqt4-xml libqtcore4 libqtgui4 libqtwebkit4 libstdc++6 libx11-6 libxext6 libxss1 libxv1 libssl1.0.0}
+    dependencies = %w{
+        libasound2
+        libqt4-dbus libqt4-network libqt4-xml libqtcore4 libqtgui4 libqtwebkit4
+        libstdc++6
+        libx11-6 libxext6 libxss1 libxv1
+        libssl1.0.0
+    }
+    install_pkg(dependencies)
+
+    # 2013-11-15: Need to install these 32-bit drivers because skype is 32-bit
+    dependencies = %w{libasound2-plugins:i386}
     install_pkg(dependencies)
 
     deb = "skype-ubuntu-precise_4.2.0.11-1_i386.deb"
