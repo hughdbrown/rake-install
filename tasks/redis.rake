@@ -1,10 +1,10 @@
 namespace :redis do
-  REDIS_VERSION_STR = "2.6.14"
+  REDIS_VERSION_STR = "2.8.0"
 
   desc "Install redis database"
   task :bin do
     version = "redis-#{REDIS_VERSION_STR}"
-    url = "http://redis.googlecode.com/files/#{version}.tar.gz"
+    url = "http://download.redis.io/releases/#{version}.tar.gz"
 
     test_fn = Proc.new {
       expect = /Redis server v=#{REDIS_VERSION_STR}.*/
