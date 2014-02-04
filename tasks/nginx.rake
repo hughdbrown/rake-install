@@ -1,9 +1,9 @@
 namespace :nginx do
-  NGINX_VER = "nginx-1.5.7"
-  PSOL_VER = "1.5.27.3"
+  NGINX_VER = "nginx-1.5.10"
+  PSOL_VER = "1.7.30.3"
   PSOL_TAR = "#{PSOL_VER}.tar.gz"
-  PAGESPEED_VER = "release-#{PSOL_VER}-beta"
-  PAGESPEED_ZIP = "#{PAGESPEED_VER}.zip"
+  PAGESPEED_VER = "#{PSOL_VER}-beta"
+  PAGESPEED_ZIP = "v#{PAGESPEED_VER}.zip"
   PAGESPEED_DIR = "ngx_pagespeed-#{PAGESPEED_VER}"
   NGINX_INIT = "data/nginx"
 
@@ -100,10 +100,10 @@ namespace :nginx do
           # ...
         end
         notice("Installed nginx binary")
-        Rake::Task["nginx:service"].invoke
-        Rake::Task["nginx:adduser"].invoke
       end
     end
+    Rake::Task["nginx:service"].invoke
+    Rake::Task["nginx:adduser"].invoke
   end
 
   desc "Install nginx service"
