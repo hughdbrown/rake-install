@@ -1,5 +1,5 @@
 namespace :git do
-  GIT_VERSION_STR = "1.8.5"
+  GIT_VERSION_STR = "1.9.0"
 
   desc "Install libgit2 library"
   task :libgit2 => ["dev:essential"] do
