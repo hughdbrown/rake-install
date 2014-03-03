@@ -1,5 +1,5 @@
 namespace :tmux do
-  TMUX_VERSION_STR = "1.8"
+  TMUX_VERSION_STR = "1.9"
 
   desc "Install libevent"
   task :libevent do
