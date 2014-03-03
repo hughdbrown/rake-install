@@ -7,7 +7,7 @@ namespace :rabbitmq do
   end
 
   task :librabbitmq do
-    pkgs = %w{ librabbitmq }
+    pkgs = %w{ librabbitmq-dev }
     install_pkg(pkgs)
   end
 

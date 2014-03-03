@@ -1,5 +1,5 @@
 namespace :python do
-  PYTHON_VERSION_STR = "3.3.2"
+  PYTHON_VERSION_STR = "3.3.4"
   PYTHON_BIN = "python3.3"
   VERSION_CMD = "#{PYTHON_BIN} --version"
   EXPECTED_VERSION_STR = "Python #{PYTHON_VERSION_STR}" 
