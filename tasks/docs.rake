@@ -14,7 +14,8 @@ namespace :docs do
     FileUtils.cd(TMP_DIR) do
       sh("wget http://mirror.ctan.org/systems/texlive/tlnet/#{LATEX_TAR}")
       sh("tar xvzf #{LATEX_TAR}")
-      FileUtils.cd("install-tl-20130815") do
+      tar_directory = Dir["/tmp/install-tl-2*"][0]
+      FileUtils.cd(tar_directory) do
         sh("sudo ./install-tl")
       end
     end
