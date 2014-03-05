@@ -1,5 +1,5 @@
 namespace :redis do
-  REDIS_VERSION_STR = "2.8.0"
+  REDIS_VERSION_STR = "2.8.7"
 
   desc "Install redis database"
   task :bin do
