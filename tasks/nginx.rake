@@ -1,5 +1,5 @@
 namespace :nginx do
-  NGINX_VER = "nginx-1.5.10"
+  NGINX_VER = "nginx-1.5.12"
   PSOL_VER = "1.7.30.3"
   PSOL_TAR = "#{PSOL_VER}.tar.gz"
   PAGESPEED_VER = "#{PSOL_VER}-beta"

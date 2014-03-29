@@ -1,6 +1,6 @@
 namespace :dropbox do
     DROPBOX_INIT = "data/dropbox"
-    
+
     desc "Install dropbox as service"
     task :dropbox do
         # http://www.spritian.com/2012/05/13/install-dropbox-as-a-service-on-linux/

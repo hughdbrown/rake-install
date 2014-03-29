@@ -4,7 +4,7 @@ namespace :llvm do
     VERSION = "3.3"
     SRC = "llvm-#{VERSION}.src"
     TARFILE = "#{SRC}.tar.gz"
-    
+
     task :llvm do
         install_pkg(["llvm-dev"])
         FileUtils.cd(TMP_DIR) do
@@ -16,7 +16,7 @@ namespace :llvm do
             end
         end
     end
-    
+
     desc "Install llvmpy"
     # task :llvmpy => [:llvm] do
     task :llvmpy do

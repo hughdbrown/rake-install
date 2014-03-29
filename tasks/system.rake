@@ -12,7 +12,7 @@ namespace :system do
   end
 
   task :file_system_lib do
-    # libcurl4-nss-dev 
+    # libcurl4-nss-dev
     tools = %w{libfuse2 libfuse-dev libattr1-dev libxml2 libxml2-dev}
     install_pkg(tools)
   end

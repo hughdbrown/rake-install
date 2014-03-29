@@ -19,7 +19,7 @@ end
 
 #desc "Install webservers"
 task :webserver => [
-    "webserver:apache", 
+    "webserver:apache",
     #"webserver:cherokee"
 ]
 

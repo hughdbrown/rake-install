@@ -5,7 +5,7 @@ namespace :docker do
 
         # Add the Docker repository to your apt sources list.
         sh('sudo sh -c "echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"')
-        
+
         # Update your sources and install
         sh('sudo apt-get update')
         install_pkg(['lxc-docker'])
