@@ -2,7 +2,7 @@ namespace :schwab do
     # ICA_CLIENT_DEB_URL = "https://help.ubuntu.com/community/CitrixICAClientHowTo?action=AttachFile&do=get&target=icaclient_12.1.0_amd64.deb"
     # ICA_CLIENT_DEBNAME = "icaclient-12.1.0_i386.deb"
     # ICA_CLIENT_DEB_URL = "http://download.citrix.com.edgesuite.net/akdlm/8618/icaclient_13.0.0.256735_amd64.deb?__gda__=1389824783_7175e8e560aabe1d0fb687f9b5b77e49&__dlmgda__=1389907837_1edad505574e0c251823f5a85a4e6aca&fileExt=.deb"
-    ICA_CLIENT_DEB_URL = "https://downloads.citrix.com/akdlm/8618/icaclient_13.0.0.256735_amd64.deb?__gda__=1393820571_d5a5be29d108567bb948e1091e3528f1&__dlmgda__=1393903386_2599334416098834edd7d1fbdf916bd7&fileExt=.deb"
+    ICA_CLIENT_DEB_URL = "https://downloads.citrix.com/akdlm/8618/icaclient_13.0.0.256735_amd64.deb?__gda__=1396942842_ded009de6a1bd014bc81847e3dc38830&__dlmgda__=1397025659_a8c673f42345f0cb0af8bfc08425b37e&fileExt=.deb"
     ICA_CLIENT_DEBNAME = "icaclient_13.0.0.256735_amd64"
 
     task "Install dependencies"
