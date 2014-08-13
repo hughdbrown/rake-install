@@ -32,7 +32,7 @@ namespace :media do
 
   desc "Install abcde (for ripping CDs)"
   task :abcde do
-    pkgs = %w{ abcde lame id3v2 }
+    pkgs = %w{ abcde lame id3v2 eyeD3 }
     install_pkg(pkgs)
   end
 
