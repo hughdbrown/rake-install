@@ -1,5 +1,5 @@
 namespace :git do
-  GIT_VERSION_STR = "2.0.4"
+  GIT_VERSION_STR = "2.1.3"
 
   desc "Install libgit2 library"
   task :libgit2 => ["dev:essential"] do
@@ -23,7 +23,8 @@ namespace :git do
     }
 
     version = "git-#{GIT_VERSION_STR}"
-    url = "https://git-core.googlecode.com/files/#{version}.tar.gz"
+    # url = "https://git-core.googlecode.com/files/#{version}.tar.gz"
+    url = "https://www.kernel.org/pub/software/scm/git/#{version}.tar.xz"
     install_tar(url, version, {:test => test_fn})
   end
 
